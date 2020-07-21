@@ -39,10 +39,20 @@ public:
      * @param testCase Specific entry to analyse
      * @param K Number of neighbors to analyse
      * @param cases Number of trainned cases
+     * @param caseIndex Index of given case
     */
     void classify(KNNData *&trainningCases, KNNData testCase, int K, int cases, int caseIndex) override;
 
-    virtual void cudaClassify(KNNData *&trainningCases, KNNData *&testCases, int *nCases, int *nTests, int *K);
+    /**
+     * Cuda Classify.
+     * Virtual function to execute classification using Cuda.
+     * @param trainningCases Array with trainning data.
+     * @param testCases Array of test cases.
+     * @param nCases Number of trainning cases
+     * @param nTests Number of test cases
+     * @param K Number of neighbors
+    */
+    virtual void cudaClassify(KNNData *&trainningCases, KNNData *&testCases, int *nCases, int *nTests, int *K) override;
 };
 
 #endif // CKNNCUDA_H

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['sepallenght_13',['sepalLenght',['../struct_k_n_n_data.html#ad1a26b8d91f989e9b9b4cc9fa4a3889c',1,'KNNData']]],
-  ['sepalwidth_14',['sepalWidth',['../struct_k_n_n_data.html#a25b42131b3cfb3dc939e39bd4034fcb7',1,'KNNData']]]
+  ['manhattandistance_19',['manhattanDistance',['../class_c_k_n_n.html#aa5df3208c8a6b67334d1f15da32758ec',1,'CKNN']]],
+  ['minkowskidistance_20',['minkowskiDistance',['../class_c_k_n_n.html#a85589e490d361f32295ed8ba28066f42',1,'CKNN']]]
 ];

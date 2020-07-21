@@ -1,4 +1,8 @@
 var searchData=
 [
-  ['returnclassification_29',['returnClassification',['../class_c_k_n_n.html#ac329ad857593a66c70961241ec9806b3',1,'CKNN']]]
+  ['getkneighbors_46',['getKneighbors',['../class_c_main_window.html#aa9694656c4b8959c6b91e1b496815ee5',1,'CMainWindow']]],
+  ['getnumberoftestcases_47',['getNumberOfTestCases',['../class_c_main_window.html#a87c08d9af1ddff86310a130cf9390305',1,'CMainWindow']]],
+  ['getnumberoftrainningcases_48',['getNumberOfTrainningCases',['../class_c_main_window.html#a8747da4e7bbade702151cf6b29947c86',1,'CMainWindow']]],
+  ['gettestcases_49',['getTestCases',['../class_c_main_window.html#a3dce8fff807c7bb9e58d26b80a3ff588',1,'CMainWindow']]],
+  ['gettrainningcases_50',['getTrainningCases',['../class_c_main_window.html#a67075309aa5fc1f992c972aed64d1345',1,'CMainWindow']]]
 ];

@@ -20,8 +20,7 @@ Inherits \mbox{\hyperlink{class_c_k_n_n}{C\+K\+NN}}.
 \item 
 void \mbox{\hyperlink{class_c_k_n_n_parallel_a76b3ee4d19dee5b5870121871a596d57}{classify}} (\mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} $\ast$\&trainning\+Cases, \mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} test\+Case, int K, int cases, int case\+Index) override
 \item 
-\mbox{\Hypertarget{class_c_k_n_n_parallel_a8918025dd9e70e31d4299bc3c7aae8bf}\label{class_c_k_n_n_parallel_a8918025dd9e70e31d4299bc3c7aae8bf}} 
-void {\bfseries cuda\+Classify} (\mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} $\ast$\&trainning\+Cases, \mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} $\ast$\&test\+Cases, int $\ast$n\+Cases, int $\ast$n\+Tests, int $\ast$K) override
+void \mbox{\hyperlink{class_c_k_n_n_parallel_a8918025dd9e70e31d4299bc3c7aae8bf}{cuda\+Classify}} (\mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} $\ast$\&trainning\+Cases, \mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} $\ast$\&test\+Cases, int $\ast$n\+Cases, int $\ast$n\+Tests, int $\ast$K) override
 \end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -57,10 +56,35 @@ Classify. O\+V\+E\+R\+R\+R\+I\+DE -\/ Function to execute classification using K
 \hline
 {\em cases} & Number of trainned cases \\
 \hline
+{\em case\+Index} & Index of given case \\
+\hline
 \end{DoxyParams}
 
 
 Implements \mbox{\hyperlink{class_c_k_n_n_adea4172823de48d03f06a52b599361d0}{C\+K\+NN}}.
+
+\mbox{\Hypertarget{class_c_k_n_n_parallel_a8918025dd9e70e31d4299bc3c7aae8bf}\label{class_c_k_n_n_parallel_a8918025dd9e70e31d4299bc3c7aae8bf}} 
+\index{CKNNParallel@{CKNNParallel}!cudaClassify@{cudaClassify}}
+\index{cudaClassify@{cudaClassify}!CKNNParallel@{CKNNParallel}}
+\doxysubsubsection{\texorpdfstring{cudaClassify()}{cudaClassify()}}
+{\footnotesize\ttfamily void C\+K\+N\+N\+Parallel\+::cuda\+Classify (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} $\ast$\&}]{trainning\+Cases,  }\item[{\mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} $\ast$\&}]{test\+Cases,  }\item[{int $\ast$}]{n\+Cases,  }\item[{int $\ast$}]{n\+Tests,  }\item[{int $\ast$}]{K }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Cuda Classify. Virtual function to execute classification using Cuda. 
+\begin{DoxyParams}{Parameters}
+{\em trainning\+Cases} & Array with trainning data. \\
+\hline
+{\em test\+Cases} & Array of test cases. \\
+\hline
+{\em n\+Cases} & Number of trainning cases \\
+\hline
+{\em n\+Tests} & Number of test cases \\
+\hline
+{\em K} & Number of neighbors \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_c_k_n_n_a298e8b5c941e5dbfc2de94b0e4198e4d}{C\+K\+NN}}.
 
 
 

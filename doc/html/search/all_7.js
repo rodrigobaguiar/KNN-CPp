@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['_7ecmainwindow_15',['~CMainWindow',['../class_c_main_window.html#a88ac822b72fa516a97f20c12cb549201',1,'CMainWindow']]]
+  ['petallenght_21',['petalLenght',['../struct_k_n_n_data.html#acb257f34a5723c0253f0443dafc0a599',1,'KNNData']]],
+  ['petalwidht_22',['petalWidht',['../struct_k_n_n_data.html#a8fe1222612a8ef6f9e1095922a303526',1,'KNNData']]]
 ];

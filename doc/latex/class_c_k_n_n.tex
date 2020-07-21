@@ -22,28 +22,23 @@ Inherited by \mbox{\hyperlink{class_c_k_n_n_cuda}{C\+K\+N\+N\+Cuda}}, \mbox{\hyp
 \item 
 virtual void \mbox{\hyperlink{class_c_k_n_n_adea4172823de48d03f06a52b599361d0}{classify}} (\mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} $\ast$\&trainning\+Cases, \mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} test\+Case, int K, int cases, int case\+Index)=0
 \item 
-\mbox{\Hypertarget{class_c_k_n_n_a298e8b5c941e5dbfc2de94b0e4198e4d}\label{class_c_k_n_n_a298e8b5c941e5dbfc2de94b0e4198e4d}} 
-virtual void {\bfseries cuda\+Classify} (\mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} $\ast$\&trainning\+Cases, \mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} $\ast$\&test\+Cases, int $\ast$n\+Cases, int $\ast$n\+Tests, int $\ast$K)=0
+virtual void \mbox{\hyperlink{class_c_k_n_n_a298e8b5c941e5dbfc2de94b0e4198e4d}{cuda\+Classify}} (\mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} $\ast$\&trainning\+Cases, \mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} $\ast$\&test\+Cases, int $\ast$n\+Cases, int $\ast$n\+Tests, int $\ast$K)=0
 \end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_c_k_n_n_aeed709762850745fde5dcb800045c618}\label{class_c_k_n_n_aeed709762850745fde5dcb800045c618}} 
-std\+::vector$<$ std\+::string $>$ {\bfseries class\+Found}
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{class_c_k_n_n_aeed709762850745fde5dcb800045c618}{class\+Found}}
 \end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 double \mbox{\hyperlink{class_c_k_n_n_aa8694b2b13d64dcd5c1f439a40180f63}{euclidian\+Distance}} (\mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} \&first, \mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} \&second)
 \item 
-\mbox{\Hypertarget{class_c_k_n_n_aa5df3208c8a6b67334d1f15da32758ec}\label{class_c_k_n_n_aa5df3208c8a6b67334d1f15da32758ec}} 
-double {\bfseries manhattan\+Distance} (\mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} \&first, \mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} \&second)
+double \mbox{\hyperlink{class_c_k_n_n_aa5df3208c8a6b67334d1f15da32758ec}{manhattan\+Distance}} (\mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} \&first, \mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} \&second)
 \item 
-\mbox{\Hypertarget{class_c_k_n_n_a85589e490d361f32295ed8ba28066f42}\label{class_c_k_n_n_a85589e490d361f32295ed8ba28066f42}} 
-double {\bfseries minkowski\+Distance} (\mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} \&first, \mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} \&second)
+double \mbox{\hyperlink{class_c_k_n_n_a85589e490d361f32295ed8ba28066f42}{minkowski\+Distance}} (\mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} \&first, \mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} \&second)
 \item 
-\mbox{\Hypertarget{class_c_k_n_n_a48ceadfceffabdec91993098df723e9b}\label{class_c_k_n_n_a48ceadfceffabdec91993098df723e9b}} 
-double {\bfseries hamming\+Distance} (\mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} \&first, \mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} \&second)
+double \mbox{\hyperlink{class_c_k_n_n_a48ceadfceffabdec91993098df723e9b}{hamming\+Distance}} (\mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} \&first, \mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} \&second)
 \item 
 std\+::string \mbox{\hyperlink{class_c_k_n_n_ac329ad857593a66c70961241ec9806b3}{return\+Classification}} (int setosa, int versicolor, int virginica)
 \end{DoxyCompactItemize}
@@ -99,10 +94,35 @@ Classify. Virtual function to execute classification using given class.
 \hline
 {\em cases} & Number of trainned cases \\
 \hline
+{\em case\+Index} & Index of given case \\
+\hline
 \end{DoxyParams}
 
 
 Implemented in \mbox{\hyperlink{class_c_k_n_n_cuda_ac74191b3d7553e961f9ef507cff2c84e}{C\+K\+N\+N\+Cuda}}, \mbox{\hyperlink{class_c_k_n_n_parallel_a76b3ee4d19dee5b5870121871a596d57}{C\+K\+N\+N\+Parallel}}, and \mbox{\hyperlink{class_c_k_n_n_serial_ad5ee89306f7daf3630b6b394f3902976}{C\+K\+N\+N\+Serial}}.
+
+\mbox{\Hypertarget{class_c_k_n_n_a298e8b5c941e5dbfc2de94b0e4198e4d}\label{class_c_k_n_n_a298e8b5c941e5dbfc2de94b0e4198e4d}} 
+\index{CKNN@{CKNN}!cudaClassify@{cudaClassify}}
+\index{cudaClassify@{cudaClassify}!CKNN@{CKNN}}
+\doxysubsubsection{\texorpdfstring{cudaClassify()}{cudaClassify()}}
+{\footnotesize\ttfamily virtual void C\+K\+N\+N\+::cuda\+Classify (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} $\ast$\&}]{trainning\+Cases,  }\item[{\mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} $\ast$\&}]{test\+Cases,  }\item[{int $\ast$}]{n\+Cases,  }\item[{int $\ast$}]{n\+Tests,  }\item[{int $\ast$}]{K }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Cuda Classify. Virtual function to execute classification using Cuda. 
+\begin{DoxyParams}{Parameters}
+{\em trainning\+Cases} & Array with trainning data. \\
+\hline
+{\em test\+Cases} & Array of test cases. \\
+\hline
+{\em n\+Cases} & Number of trainning cases \\
+\hline
+{\em n\+Tests} & Number of test cases \\
+\hline
+{\em K} & Number of neighbors \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_c_k_n_n_cuda_accb5ab1e2ffe0e99c4192fa9da8f1fa4}{C\+K\+N\+N\+Cuda}}, \mbox{\hyperlink{class_c_k_n_n_parallel_a8918025dd9e70e31d4299bc3c7aae8bf}{C\+K\+N\+N\+Parallel}}, and \mbox{\hyperlink{class_c_k_n_n_serial_af122a41c6d083768ff7ff4f807261c95}{C\+K\+N\+N\+Serial}}.
 
 \mbox{\Hypertarget{class_c_k_n_n_aa8694b2b13d64dcd5c1f439a40180f63}\label{class_c_k_n_n_aa8694b2b13d64dcd5c1f439a40180f63}} 
 \index{CKNN@{CKNN}!euclidianDistance@{euclidianDistance}}
@@ -111,6 +131,45 @@ Implemented in \mbox{\hyperlink{class_c_k_n_n_cuda_ac74191b3d7553e961f9ef507cff2
 {\footnotesize\ttfamily double C\+K\+N\+N\+::euclidian\+Distance (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} \&}]{first,  }\item[{\mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} \&}]{second }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 Euclidian Distance. Calculate the euclidian distance between two registers. 
+\begin{DoxyParams}{Parameters}
+{\em first} & First register \\
+\hline
+{\em second} & Second register \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_c_k_n_n_a48ceadfceffabdec91993098df723e9b}\label{class_c_k_n_n_a48ceadfceffabdec91993098df723e9b}} 
+\index{CKNN@{CKNN}!hammingDistance@{hammingDistance}}
+\index{hammingDistance@{hammingDistance}!CKNN@{CKNN}}
+\doxysubsubsection{\texorpdfstring{hammingDistance()}{hammingDistance()}}
+{\footnotesize\ttfamily double C\+K\+N\+N\+::hamming\+Distance (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} \&}]{first,  }\item[{\mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} \&}]{second }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Hamming Distance. Calculate the distance between two registers. 
+\begin{DoxyParams}{Parameters}
+{\em first} & First register \\
+\hline
+{\em second} & Second register \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_c_k_n_n_aa5df3208c8a6b67334d1f15da32758ec}\label{class_c_k_n_n_aa5df3208c8a6b67334d1f15da32758ec}} 
+\index{CKNN@{CKNN}!manhattanDistance@{manhattanDistance}}
+\index{manhattanDistance@{manhattanDistance}!CKNN@{CKNN}}
+\doxysubsubsection{\texorpdfstring{manhattanDistance()}{manhattanDistance()}}
+{\footnotesize\ttfamily double C\+K\+N\+N\+::manhattan\+Distance (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} \&}]{first,  }\item[{\mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} \&}]{second }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Manhattan Distance. Calculate the distance between two registers. 
+\begin{DoxyParams}{Parameters}
+{\em first} & First register \\
+\hline
+{\em second} & Second register \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_c_k_n_n_a85589e490d361f32295ed8ba28066f42}\label{class_c_k_n_n_a85589e490d361f32295ed8ba28066f42}} 
+\index{CKNN@{CKNN}!minkowskiDistance@{minkowskiDistance}}
+\index{minkowskiDistance@{minkowskiDistance}!CKNN@{CKNN}}
+\doxysubsubsection{\texorpdfstring{minkowskiDistance()}{minkowskiDistance()}}
+{\footnotesize\ttfamily double C\+K\+N\+N\+::minkowski\+Distance (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} \&}]{first,  }\item[{\mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} \&}]{second }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Minkowski Distance. Calculate the distance between two registers. 
 \begin{DoxyParams}{Parameters}
 {\em first} & First register \\
 \hline
@@ -133,6 +192,16 @@ Return classification. Return the class name found.
 \hline
 \end{DoxyParams}
 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_c_k_n_n_aeed709762850745fde5dcb800045c618}\label{class_c_k_n_n_aeed709762850745fde5dcb800045c618}} 
+\index{CKNN@{CKNN}!classFound@{classFound}}
+\index{classFound@{classFound}!CKNN@{CKNN}}
+\doxysubsubsection{\texorpdfstring{classFound}{classFound}}
+{\footnotesize\ttfamily std\+::vector$<$std\+::string$>$ C\+K\+N\+N\+::class\+Found}
+
+Vector of strings with classes found ~\newline
+ 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 

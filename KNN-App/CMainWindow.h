@@ -23,6 +23,7 @@
 /**
  *  Struct KNNData.
  *  Struct used to define each entrie of Iris dataset.
+ * @brief Representation of Iris data.
 */
 struct KNNData{
     double sepalLenght = 0.0;       /**< Sepal Lenght. */
@@ -64,22 +65,75 @@ public:
     //=========================================================
     //=================== Getters and Setters =================
     //=========================================================
+    /**
+     * Get Trainning Cases.
+     * Return an array with trainned cases.
+     * @return Array with trainning cases.
+    */
     inline KNNData *getTrainningCases() const { return trainningCases;}
+
+    /**
+     * Set Trainning Cases.
+     * Set an array with trainned cases.
+     * @param value Array with trainning cases.
+    */
     inline void setTrainningCases(KNNData *value) { trainningCases = value;}
 
+    /**
+     * Get Test Cases.
+     * Return an array with test cases.
+     * @return Array with test cases.
+    */
     inline KNNData *getTestCases() const { return testCases;}
+
+    /**
+     * Set Test Cases.
+     * Set an array with test cases.
+     * @param value Array with test cases.
+    */
     inline void setTestCases(KNNData *value) { testCases = value;}
 
+    /**
+     * Get N Trainning Cases.
+     * Return number of trainning cases.
+     * @return Number of trainning cases.
+    */
     inline int getNumberOfTrainningCases() const { return numberOfTrainningCases;}
+
+    /**
+     * Set N Trainning Cases.
+     * Set number of trainning cases.
+     * @param value Number of trainning cases.
+    */
     inline void setNumberOfTrainningCases(int value) { numberOfTrainningCases = value;}
 
+    /**
+     * Get N Test Cases.
+     * Return number of test cases.
+     * @return Number of test cases.
+    */
     inline int getNumberOfTestCases() const { return numberOfTestCases;}
+
+    /**
+     * Set N Test Cases.
+     * Set number of test cases.
+     * @param value Number of test cases.
+    */
     inline void setNumberOfTestCases(int value) { numberOfTestCases = value;}
 
+    /**
+     * Get K.
+     * Return number of K neighbors to use.
+     * @return Number K neighbours.
+    */
     inline int getKneighbors() const { return Kneighbors;}
+
+    /**
+     * Set K.
+     * Set number of K neighbors to use.
+     * @param value Number K neighbours.
+    */
     inline void setKneighbors(int value) { Kneighbors = value;}
-
-
 
 private slots:
 

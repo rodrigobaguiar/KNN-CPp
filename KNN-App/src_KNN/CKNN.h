@@ -38,8 +38,8 @@ public:
     CKNN();
 
     /**
-     *  Class Constructor.
-     *  Overload constructor for class CKNN.
+     * Class Constructor.
+     * Overload constructor for class CKNN.
      * @param trainningCases Pointer to trainning data array
      * @param testCases Pointer to test case data array
      * @param nTrainingCases Number of trainning cases
@@ -49,20 +49,28 @@ public:
     CKNN(KNNData* &trainningCases, KNNData* &testCases, int nTrainingCases, int nTestCases, int k);
 
     /**
-     *  Classify.
-     *  Virtual function to execute classification using given class.
+     * Classify.
+     * Virtual function to execute classification using given class.
      * @param trainningCases Array with trainning data.
      * @param testCase Specific entry to analyse
      * @param K Number of neighbors to analyse
      * @param cases Number of trainned cases
+     * @param caseIndex Index of given case
     */
     virtual void classify(KNNData *&trainningCases, KNNData testCase, int K, int cases, int caseIndex) = 0;
 
+    /**
+     * Cuda Classify.
+     * Virtual function to execute classification using Cuda.
+     * @param trainningCases Array with trainning data.
+     * @param testCases Array of test cases.
+     * @param nCases Number of trainning cases
+     * @param nTests Number of test cases
+     * @param K Number of neighbors
+    */
     virtual void cudaClassify(KNNData *&trainningCases, KNNData *&testCases, int *nCases, int *nTests, int *K) = 0;
 
-
-
-    std::vector<std::string> classFound;
+    std::vector<std::string> classFound;            /**< Vector of strings with classes found  */
 
 protected:
     /**
@@ -73,10 +81,28 @@ protected:
     */
     double euclidianDistance(KNNData &first, KNNData &second);
 
+    /**
+     * Manhattan Distance.
+     * Calculate the distance between two registers.
+     * @param first First register
+     * @param second Second register
+    */
     double manhattanDistance(KNNData &first, KNNData &second);
 
+    /**
+     * Minkowski Distance.
+     * Calculate the distance between two registers.
+     * @param first First register
+     * @param second Second register
+    */
     double minkowskiDistance(KNNData &first, KNNData &second);
 
+    /**
+     * Hamming Distance.
+     * Calculate the distance between two registers.
+     * @param first First register
+     * @param second Second register
+    */
     double hammingDistance(KNNData &first, KNNData &second);
 
     /**
@@ -87,8 +113,6 @@ protected:
      * @param virginica Iris-virginica counter
     */
     std::string returnClassification(int setosa, int versicolor, int virginica);
-
-
 };
 
 #endif // CKNN_H

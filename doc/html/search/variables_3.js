@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['petallenght_1666',['petalLenght',['../struct_k_n_n_data.html#acb257f34a5723c0253f0443dafc0a599',1,'KNNData']]],
-  ['petalwidht_1667',['petalWidht',['../struct_k_n_n_data.html#a8fe1222612a8ef6f9e1095922a303526',1,'KNNData']]]
+  ['sepallenght_66',['sepalLenght',['../struct_k_n_n_data.html#ad1a26b8d91f989e9b9b4cc9fa4a3889c',1,'KNNData']]],
+  ['sepalwidth_67',['sepalWidth',['../struct_k_n_n_data.html#a25b42131b3cfb3dc939e39bd4034fcb7',1,'KNNData']]]
 ];
