@@ -1,0 +1,70 @@
+\hypertarget{class_c_k_n_n_serial}{}\doxysection{C\+K\+N\+N\+Serial Class Reference}
+\label{class_c_k_n_n_serial}\index{CKNNSerial@{CKNNSerial}}
+
+
+Knn serial computation.  
+
+
+
+
+{\ttfamily \#include $<$C\+K\+N\+N\+Serial.\+h$>$}
+
+
+
+Inherits \mbox{\hyperlink{class_c_k_n_n}{C\+K\+NN}}.
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_c_k_n_n_serial_a22b46ad5db83be5bb2210850fa83f290}{C\+K\+N\+N\+Serial}} ()
+\item 
+void \mbox{\hyperlink{class_c_k_n_n_serial_ad5ee89306f7daf3630b6b394f3902976}{classify}} (\mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} $\ast$\&trainning\+Cases, \mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} test\+Case, int K, int cases, int case\+Index) override
+\item 
+\mbox{\Hypertarget{class_c_k_n_n_serial_af122a41c6d083768ff7ff4f807261c95}\label{class_c_k_n_n_serial_af122a41c6d083768ff7ff4f807261c95}} 
+void {\bfseries cuda\+Classify} (\mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} $\ast$\&trainning\+Cases, \mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} $\ast$\&test\+Cases, int $\ast$n\+Cases, int $\ast$n\+Tests, int $\ast$K) override
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Knn serial computation. 
+
+Class \mbox{\hyperlink{class_c_k_n_n_serial}{C\+K\+N\+N\+Serial}}. Class to perform knn calculation using serial processing. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_c_k_n_n_serial_a22b46ad5db83be5bb2210850fa83f290}\label{class_c_k_n_n_serial_a22b46ad5db83be5bb2210850fa83f290}} 
+\index{CKNNSerial@{CKNNSerial}!CKNNSerial@{CKNNSerial}}
+\index{CKNNSerial@{CKNNSerial}!CKNNSerial@{CKNNSerial}}
+\doxysubsubsection{\texorpdfstring{CKNNSerial()}{CKNNSerial()}}
+{\footnotesize\ttfamily C\+K\+N\+N\+Serial\+::\+C\+K\+N\+N\+Serial (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Class Constructor. Constructor for K\+N\+N\+Serial class. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_c_k_n_n_serial_ad5ee89306f7daf3630b6b394f3902976}\label{class_c_k_n_n_serial_ad5ee89306f7daf3630b6b394f3902976}} 
+\index{CKNNSerial@{CKNNSerial}!classify@{classify}}
+\index{classify@{classify}!CKNNSerial@{CKNNSerial}}
+\doxysubsubsection{\texorpdfstring{classify()}{classify()}}
+{\footnotesize\ttfamily void C\+K\+N\+N\+Serial\+::classify (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} $\ast$\&}]{trainning\+Cases,  }\item[{\mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}}}]{test\+Case,  }\item[{int}]{K,  }\item[{int}]{cases,  }\item[{int}]{case\+Index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Classify. O\+V\+E\+R\+R\+R\+I\+DE -\/ Function to execute classification using K\+N\+N\+Serial class. 
+\begin{DoxyParams}{Parameters}
+{\em trainning\+Cases} & Array with trainning data. \\
+\hline
+{\em test\+Case} & Specific entry to analyse \\
+\hline
+{\em K} & Number of neighbors to analyse \\
+\hline
+{\em cases} & Number of trainned cases \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_c_k_n_n_adea4172823de48d03f06a52b599361d0}{C\+K\+NN}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+K\+N\+N-\/\+App/src\+\_\+\+K\+N\+N/C\+K\+N\+N\+Serial.\+h\item 
+K\+N\+N-\/\+App/src\+\_\+\+K\+N\+N/C\+K\+N\+N\+Serial.\+cpp\end{DoxyCompactItemize}

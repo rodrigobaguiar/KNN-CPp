@@ -1,0 +1,140 @@
+\hypertarget{class_c_k_n_n}{}\doxysection{C\+K\+NN Class Reference}
+\label{class_c_k_n_n}\index{CKNN@{CKNN}}
+
+
+Knn base class.  
+
+
+
+
+{\ttfamily \#include $<$C\+K\+N\+N.\+h$>$}
+
+
+
+Inherited by \mbox{\hyperlink{class_c_k_n_n_cuda}{C\+K\+N\+N\+Cuda}}, \mbox{\hyperlink{class_c_k_n_n_parallel}{C\+K\+N\+N\+Parallel}}, and \mbox{\hyperlink{class_c_k_n_n_serial}{C\+K\+N\+N\+Serial}}.
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_c_k_n_n_a1d6a7cd5d00ea750a3c9a1f7d8865e38}{C\+K\+NN}} ()
+\item 
+\mbox{\hyperlink{class_c_k_n_n_a8eee21932a41a988cd37a5bf4e0cca89}{C\+K\+NN}} (\mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} $\ast$\&trainning\+Cases, \mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} $\ast$\&test\+Cases, int n\+Training\+Cases, int n\+Test\+Cases, int k)
+\item 
+virtual void \mbox{\hyperlink{class_c_k_n_n_adea4172823de48d03f06a52b599361d0}{classify}} (\mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} $\ast$\&trainning\+Cases, \mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} test\+Case, int K, int cases, int case\+Index)=0
+\item 
+\mbox{\Hypertarget{class_c_k_n_n_a298e8b5c941e5dbfc2de94b0e4198e4d}\label{class_c_k_n_n_a298e8b5c941e5dbfc2de94b0e4198e4d}} 
+virtual void {\bfseries cuda\+Classify} (\mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} $\ast$\&trainning\+Cases, \mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} $\ast$\&test\+Cases, int $\ast$n\+Cases, int $\ast$n\+Tests, int $\ast$K)=0
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_c_k_n_n_aeed709762850745fde5dcb800045c618}\label{class_c_k_n_n_aeed709762850745fde5dcb800045c618}} 
+std\+::vector$<$ std\+::string $>$ {\bfseries class\+Found}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{class_c_k_n_n_aa8694b2b13d64dcd5c1f439a40180f63}{euclidian\+Distance}} (\mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} \&first, \mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} \&second)
+\item 
+\mbox{\Hypertarget{class_c_k_n_n_aa5df3208c8a6b67334d1f15da32758ec}\label{class_c_k_n_n_aa5df3208c8a6b67334d1f15da32758ec}} 
+double {\bfseries manhattan\+Distance} (\mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} \&first, \mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} \&second)
+\item 
+\mbox{\Hypertarget{class_c_k_n_n_a85589e490d361f32295ed8ba28066f42}\label{class_c_k_n_n_a85589e490d361f32295ed8ba28066f42}} 
+double {\bfseries minkowski\+Distance} (\mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} \&first, \mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} \&second)
+\item 
+\mbox{\Hypertarget{class_c_k_n_n_a48ceadfceffabdec91993098df723e9b}\label{class_c_k_n_n_a48ceadfceffabdec91993098df723e9b}} 
+double {\bfseries hamming\+Distance} (\mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} \&first, \mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} \&second)
+\item 
+std\+::string \mbox{\hyperlink{class_c_k_n_n_ac329ad857593a66c70961241ec9806b3}{return\+Classification}} (int setosa, int versicolor, int virginica)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Knn base class. 
+
+Class \mbox{\hyperlink{class_c_k_n_n}{C\+K\+NN}}. Base class for knn networks. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_c_k_n_n_a1d6a7cd5d00ea750a3c9a1f7d8865e38}\label{class_c_k_n_n_a1d6a7cd5d00ea750a3c9a1f7d8865e38}} 
+\index{CKNN@{CKNN}!CKNN@{CKNN}}
+\index{CKNN@{CKNN}!CKNN@{CKNN}}
+\doxysubsubsection{\texorpdfstring{CKNN()}{CKNN()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily C\+K\+N\+N\+::\+C\+K\+NN (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Class Constructor. Class constructor for \mbox{\hyperlink{class_c_k_n_n}{C\+K\+NN}} class. \mbox{\Hypertarget{class_c_k_n_n_a8eee21932a41a988cd37a5bf4e0cca89}\label{class_c_k_n_n_a8eee21932a41a988cd37a5bf4e0cca89}} 
+\index{CKNN@{CKNN}!CKNN@{CKNN}}
+\index{CKNN@{CKNN}!CKNN@{CKNN}}
+\doxysubsubsection{\texorpdfstring{CKNN()}{CKNN()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily C\+K\+N\+N\+::\+C\+K\+NN (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} $\ast$\&}]{trainning\+Cases,  }\item[{\mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} $\ast$\&}]{test\+Cases,  }\item[{int}]{n\+Training\+Cases,  }\item[{int}]{n\+Test\+Cases,  }\item[{int}]{k }\end{DoxyParamCaption})}
+
+Class Constructor. Overload constructor for class \mbox{\hyperlink{class_c_k_n_n}{C\+K\+NN}}. 
+\begin{DoxyParams}{Parameters}
+{\em trainning\+Cases} & Pointer to trainning data array \\
+\hline
+{\em test\+Cases} & Pointer to test case data array \\
+\hline
+{\em n\+Training\+Cases} & Number of trainning cases \\
+\hline
+{\em n\+Test\+Cases} & Number of test cases \\
+\hline
+{\em k} & Neighbors to analyse \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_c_k_n_n_adea4172823de48d03f06a52b599361d0}\label{class_c_k_n_n_adea4172823de48d03f06a52b599361d0}} 
+\index{CKNN@{CKNN}!classify@{classify}}
+\index{classify@{classify}!CKNN@{CKNN}}
+\doxysubsubsection{\texorpdfstring{classify()}{classify()}}
+{\footnotesize\ttfamily virtual void C\+K\+N\+N\+::classify (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} $\ast$\&}]{trainning\+Cases,  }\item[{\mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}}}]{test\+Case,  }\item[{int}]{K,  }\item[{int}]{cases,  }\item[{int}]{case\+Index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Classify. Virtual function to execute classification using given class. 
+\begin{DoxyParams}{Parameters}
+{\em trainning\+Cases} & Array with trainning data. \\
+\hline
+{\em test\+Case} & Specific entry to analyse \\
+\hline
+{\em K} & Number of neighbors to analyse \\
+\hline
+{\em cases} & Number of trainned cases \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_c_k_n_n_cuda_ac74191b3d7553e961f9ef507cff2c84e}{C\+K\+N\+N\+Cuda}}, \mbox{\hyperlink{class_c_k_n_n_parallel_a76b3ee4d19dee5b5870121871a596d57}{C\+K\+N\+N\+Parallel}}, and \mbox{\hyperlink{class_c_k_n_n_serial_ad5ee89306f7daf3630b6b394f3902976}{C\+K\+N\+N\+Serial}}.
+
+\mbox{\Hypertarget{class_c_k_n_n_aa8694b2b13d64dcd5c1f439a40180f63}\label{class_c_k_n_n_aa8694b2b13d64dcd5c1f439a40180f63}} 
+\index{CKNN@{CKNN}!euclidianDistance@{euclidianDistance}}
+\index{euclidianDistance@{euclidianDistance}!CKNN@{CKNN}}
+\doxysubsubsection{\texorpdfstring{euclidianDistance()}{euclidianDistance()}}
+{\footnotesize\ttfamily double C\+K\+N\+N\+::euclidian\+Distance (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} \&}]{first,  }\item[{\mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} \&}]{second }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Euclidian Distance. Calculate the euclidian distance between two registers. 
+\begin{DoxyParams}{Parameters}
+{\em first} & First register \\
+\hline
+{\em second} & Second register \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_c_k_n_n_ac329ad857593a66c70961241ec9806b3}\label{class_c_k_n_n_ac329ad857593a66c70961241ec9806b3}} 
+\index{CKNN@{CKNN}!returnClassification@{returnClassification}}
+\index{returnClassification@{returnClassification}!CKNN@{CKNN}}
+\doxysubsubsection{\texorpdfstring{returnClassification()}{returnClassification()}}
+{\footnotesize\ttfamily std\+::string C\+K\+N\+N\+::return\+Classification (\begin{DoxyParamCaption}\item[{int}]{setosa,  }\item[{int}]{versicolor,  }\item[{int}]{virginica }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Return classification. Return the class name found. 
+\begin{DoxyParams}{Parameters}
+{\em setosa} & Iris-\/setosa counter \\
+\hline
+{\em versicolor} & Iris-\/versicolor counter \\
+\hline
+{\em virginica} & Iris-\/virginica counter \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+K\+N\+N-\/\+App/src\+\_\+\+K\+N\+N/C\+K\+N\+N.\+h\item 
+K\+N\+N-\/\+App/src\+\_\+\+K\+N\+N/C\+K\+N\+N.\+cpp\end{DoxyCompactItemize}

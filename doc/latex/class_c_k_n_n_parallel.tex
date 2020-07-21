@@ -1,0 +1,70 @@
+\hypertarget{class_c_k_n_n_parallel}{}\doxysection{C\+K\+N\+N\+Parallel Class Reference}
+\label{class_c_k_n_n_parallel}\index{CKNNParallel@{CKNNParallel}}
+
+
+Knn using parallel processing.  
+
+
+
+
+{\ttfamily \#include $<$C\+K\+N\+N\+Parallel.\+h$>$}
+
+
+
+Inherits \mbox{\hyperlink{class_c_k_n_n}{C\+K\+NN}}.
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_c_k_n_n_parallel_aea76b390f071392f4b2575e82ac51f09}{C\+K\+N\+N\+Parallel}} ()
+\item 
+void \mbox{\hyperlink{class_c_k_n_n_parallel_a76b3ee4d19dee5b5870121871a596d57}{classify}} (\mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} $\ast$\&trainning\+Cases, \mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} test\+Case, int K, int cases, int case\+Index) override
+\item 
+\mbox{\Hypertarget{class_c_k_n_n_parallel_a8918025dd9e70e31d4299bc3c7aae8bf}\label{class_c_k_n_n_parallel_a8918025dd9e70e31d4299bc3c7aae8bf}} 
+void {\bfseries cuda\+Classify} (\mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} $\ast$\&trainning\+Cases, \mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} $\ast$\&test\+Cases, int $\ast$n\+Cases, int $\ast$n\+Tests, int $\ast$K) override
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Knn using parallel processing. 
+
+Class \mbox{\hyperlink{class_c_k_n_n_parallel}{C\+K\+N\+N\+Parallel}}. Class to perform knn calculation using parallel processing (C\+PU). 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_c_k_n_n_parallel_aea76b390f071392f4b2575e82ac51f09}\label{class_c_k_n_n_parallel_aea76b390f071392f4b2575e82ac51f09}} 
+\index{CKNNParallel@{CKNNParallel}!CKNNParallel@{CKNNParallel}}
+\index{CKNNParallel@{CKNNParallel}!CKNNParallel@{CKNNParallel}}
+\doxysubsubsection{\texorpdfstring{CKNNParallel()}{CKNNParallel()}}
+{\footnotesize\ttfamily C\+K\+N\+N\+Parallel\+::\+C\+K\+N\+N\+Parallel (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Class Constructor. Constructor for K\+N\+N\+Parallel class. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_c_k_n_n_parallel_a76b3ee4d19dee5b5870121871a596d57}\label{class_c_k_n_n_parallel_a76b3ee4d19dee5b5870121871a596d57}} 
+\index{CKNNParallel@{CKNNParallel}!classify@{classify}}
+\index{classify@{classify}!CKNNParallel@{CKNNParallel}}
+\doxysubsubsection{\texorpdfstring{classify()}{classify()}}
+{\footnotesize\ttfamily void C\+K\+N\+N\+Parallel\+::classify (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} $\ast$\&}]{trainning\+Cases,  }\item[{\mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}}}]{test\+Case,  }\item[{int}]{K,  }\item[{int}]{cases,  }\item[{int}]{case\+Index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Classify. O\+V\+E\+R\+R\+R\+I\+DE -\/ Function to execute classification using K\+N\+N\+Parallel class. 
+\begin{DoxyParams}{Parameters}
+{\em trainning\+Cases} & Array with trainning data. \\
+\hline
+{\em test\+Case} & Specific entry to analyse \\
+\hline
+{\em K} & Number of neighbors to analyse \\
+\hline
+{\em cases} & Number of trainned cases \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_c_k_n_n_adea4172823de48d03f06a52b599361d0}{C\+K\+NN}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+K\+N\+N-\/\+App/src\+\_\+\+K\+N\+N/C\+K\+N\+N\+Parallel.\+h\item 
+K\+N\+N-\/\+App/src\+\_\+\+K\+N\+N/C\+K\+N\+N\+Parallel.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,70 @@
+\hypertarget{class_c_k_n_n_cuda}{}\doxysection{C\+K\+N\+N\+Cuda Class Reference}
+\label{class_c_k_n_n_cuda}\index{CKNNCuda@{CKNNCuda}}
+
+
+Knn using C\+U\+DA.  
+
+
+
+
+{\ttfamily \#include $<$C\+K\+N\+N\+Cuda.\+h$>$}
+
+
+
+Inherits \mbox{\hyperlink{class_c_k_n_n}{C\+K\+NN}}.
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_c_k_n_n_cuda_a1fe8eaeb82dab3df0ced3ffd7203de35}{C\+K\+N\+N\+Cuda}} ()
+\item 
+void \mbox{\hyperlink{class_c_k_n_n_cuda_ac74191b3d7553e961f9ef507cff2c84e}{classify}} (\mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} $\ast$\&trainning\+Cases, \mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} test\+Case, int K, int cases, int case\+Index) override
+\item 
+\mbox{\Hypertarget{class_c_k_n_n_cuda_acadc94083df627a348523c812330fbb0}\label{class_c_k_n_n_cuda_acadc94083df627a348523c812330fbb0}} 
+virtual void {\bfseries cuda\+Classify} (\mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} $\ast$\&trainning\+Cases, \mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} $\ast$\&test\+Cases, int $\ast$n\+Cases, int $\ast$n\+Tests, int $\ast$K)
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Knn using C\+U\+DA. 
+
+Class \mbox{\hyperlink{class_c_k_n_n_cuda}{C\+K\+N\+N\+Cuda}}. Class to perform knn calculation using C\+U\+DA. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_c_k_n_n_cuda_a1fe8eaeb82dab3df0ced3ffd7203de35}\label{class_c_k_n_n_cuda_a1fe8eaeb82dab3df0ced3ffd7203de35}} 
+\index{CKNNCuda@{CKNNCuda}!CKNNCuda@{CKNNCuda}}
+\index{CKNNCuda@{CKNNCuda}!CKNNCuda@{CKNNCuda}}
+\doxysubsubsection{\texorpdfstring{CKNNCuda()}{CKNNCuda()}}
+{\footnotesize\ttfamily C\+K\+N\+N\+Cuda\+::\+C\+K\+N\+N\+Cuda (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Class Constructor. Constructor for K\+N\+N\+Cuda class. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_c_k_n_n_cuda_ac74191b3d7553e961f9ef507cff2c84e}\label{class_c_k_n_n_cuda_ac74191b3d7553e961f9ef507cff2c84e}} 
+\index{CKNNCuda@{CKNNCuda}!classify@{classify}}
+\index{classify@{classify}!CKNNCuda@{CKNNCuda}}
+\doxysubsubsection{\texorpdfstring{classify()}{classify()}}
+{\footnotesize\ttfamily void C\+K\+N\+N\+Cuda\+::classify (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}} $\ast$\&}]{trainning\+Cases,  }\item[{\mbox{\hyperlink{struct_k_n_n_data}{K\+N\+N\+Data}}}]{test\+Case,  }\item[{int}]{K,  }\item[{int}]{cases,  }\item[{int}]{case\+Index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Classify. O\+V\+E\+R\+R\+R\+I\+DE -\/ Function to execute classification using K\+N\+N\+Cuda class. 
+\begin{DoxyParams}{Parameters}
+{\em trainning\+Cases} & Array with trainning data. \\
+\hline
+{\em test\+Case} & Specific entry to analyse \\
+\hline
+{\em K} & Number of neighbors to analyse \\
+\hline
+{\em cases} & Number of trainned cases \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_c_k_n_n_adea4172823de48d03f06a52b599361d0}{C\+K\+NN}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+K\+N\+N-\/\+App/src\+\_\+\+K\+N\+N/C\+K\+N\+N\+Cuda.\+h\item 
+K\+N\+N-\/\+App/src\+\_\+\+K\+N\+N/C\+K\+N\+N\+Cuda.\+cpp\end{DoxyCompactItemize}
