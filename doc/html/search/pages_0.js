@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['knn_2dcpp_68',['KNN-Cpp',['../index.html',1,'']]]
+  ['knn_2dcpp_73',['KNN-Cpp',['../index.html',1,'']]]
 ];

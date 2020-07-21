@@ -50,15 +50,15 @@ class CMainWindow : public QMainWindow
 public:
 
     /**
-     *  Class Constructor.
-     *  A default class constructor for CMainWindow Class created by Qt.
+     * Class Constructor.
+     * A default class constructor for CMainWindow Class created by Qt.
      * @param parent Parent to QWidget base class.
     */
     CMainWindow(QWidget *parent = nullptr);
 
     /**
-     *  Class Destructor.
-     *  A default class destructor for CMainWindow Class.
+     * Class Destructor.
+     * A default class destructor for CMainWindow Class.
     */
     ~CMainWindow();
 

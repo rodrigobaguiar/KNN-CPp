@@ -34,8 +34,9 @@ QT_BEGIN_NAMESPACE
 class Ui_CMainWindow
 {
 public:
-    QAction *actionOpen;
+    QAction *actionAbout_2;
     QAction *actionClose;
+    QAction *actionAbout;
     QWidget *centralwidget;
     QHBoxLayout *horizontalLayout_2;
     QHBoxLayout *horizontalLayout;
@@ -95,7 +96,6 @@ public:
     QCustomPlot *PlotProcessingTime;
     QMenuBar *menubar;
     QMenu *menuFile;
-    QMenu *menuAbout;
     QStatusBar *statusbar;
 
     void setupUi(QMainWindow *CMainWindow)
@@ -103,10 +103,12 @@ public:
         if (CMainWindow->objectName().isEmpty())
             CMainWindow->setObjectName(QString::fromUtf8("CMainWindow"));
         CMainWindow->resize(1083, 662);
-        actionOpen = new QAction(CMainWindow);
-        actionOpen->setObjectName(QString::fromUtf8("actionOpen"));
+        actionAbout_2 = new QAction(CMainWindow);
+        actionAbout_2->setObjectName(QString::fromUtf8("actionAbout_2"));
         actionClose = new QAction(CMainWindow);
         actionClose->setObjectName(QString::fromUtf8("actionClose"));
+        actionAbout = new QAction(CMainWindow);
+        actionAbout->setObjectName(QString::fromUtf8("actionAbout"));
         centralwidget = new QWidget(CMainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         horizontalLayout_2 = new QHBoxLayout(centralwidget);
@@ -384,16 +386,13 @@ public:
         menubar->setGeometry(QRect(0, 0, 1083, 21));
         menuFile = new QMenu(menubar);
         menuFile->setObjectName(QString::fromUtf8("menuFile"));
-        menuAbout = new QMenu(menubar);
-        menuAbout->setObjectName(QString::fromUtf8("menuAbout"));
         CMainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(CMainWindow);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
         CMainWindow->setStatusBar(statusbar);
 
         menubar->addAction(menuFile->menuAction());
-        menubar->addAction(menuAbout->menuAction());
-        menuFile->addAction(actionOpen);
+        menuFile->addAction(actionAbout_2);
         menuFile->addSeparator();
         menuFile->addAction(actionClose);
 
@@ -405,8 +404,9 @@ public:
     void retranslateUi(QMainWindow *CMainWindow)
     {
         CMainWindow->setWindowTitle(QCoreApplication::translate("CMainWindow", "KNN-Cpp", nullptr));
-        actionOpen->setText(QCoreApplication::translate("CMainWindow", "Open", nullptr));
+        actionAbout_2->setText(QCoreApplication::translate("CMainWindow", "About", nullptr));
         actionClose->setText(QCoreApplication::translate("CMainWindow", "Close", nullptr));
+        actionAbout->setText(QCoreApplication::translate("CMainWindow", "About", nullptr));
         label->setText(QCoreApplication::translate("CMainWindow", "Model:", nullptr));
         CBModel->setItemText(0, QCoreApplication::translate("CMainWindow", "Choose...", nullptr));
         CBModel->setItemText(1, QCoreApplication::translate("CMainWindow", "k-nearst neighbors", nullptr));
@@ -442,7 +442,6 @@ public:
         PBClear->setText(QCoreApplication::translate("CMainWindow", "Clear", nullptr));
         PBRun->setText(QCoreApplication::translate("CMainWindow", "Run", nullptr));
         menuFile->setTitle(QCoreApplication::translate("CMainWindow", "File", nullptr));
-        menuAbout->setTitle(QCoreApplication::translate("CMainWindow", "About", nullptr));
     } // retranslateUi
 
 };

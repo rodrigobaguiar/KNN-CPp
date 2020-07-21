@@ -832,7 +832,10 @@ WARN_LOGFILE           =
 INPUT                  = /home/rodrigo/Mestrado/KNN-CPP/KNN-App/CMainWindow.cpp \
                          /home/rodrigo/Mestrado/KNN-CPP/KNN-App/CMainWindow.h \
                          /home/rodrigo/Mestrado/KNN-CPP/KNN-App/main.cpp \
-                         /home/rodrigo/Mestrado/KNN-CPP/KNN-App/src_KNN
+                         /home/rodrigo/Mestrado/KNN-CPP/KNN-App/src_KNN \
+                         KNN-App/CAboutScreen.h \
+                         KNN-App/CAboutScreen.cpp \
+                         KNN-App/src_KNN/knnCuda.cu
 
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding. Doxygen uses

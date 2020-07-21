@@ -52,15 +52,18 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = main.cpp \
+SOURCES       = CAboutScreen.cpp \
+		main.cpp \
 		CMainWindow.cpp \
 		src_KNN/CKNN.cpp \
 		src_KNN/CKNNCuda.cpp \
 		src_KNN/CKNNParallel.cpp \
 		src_KNN/CKNNSerial.cpp \
-		src_QCustomPlot/qcustomplot.cpp moc_CMainWindow.cpp \
+		src_QCustomPlot/qcustomplot.cpp moc_CAboutScreen.cpp \
+		moc_CMainWindow.cpp \
 		moc_qcustomplot.cpp
 OBJECTS       = src_KNN/knnCuda_cuda.o \
+		CAboutScreen.o \
 		main.o \
 		CMainWindow.o \
 		CKNN.o \
@@ -68,6 +71,7 @@ OBJECTS       = src_KNN/knnCuda_cuda.o \
 		CKNNParallel.o \
 		CKNNSerial.o \
 		qcustomplot.o \
+		moc_CAboutScreen.o \
 		moc_CMainWindow.o \
 		moc_qcustomplot.o
 DIST          = knnCuda.cu.cu \
@@ -270,13 +274,15 @@ DIST          = knnCuda.cu.cu \
 		/usr/local/Qt/5.15.0/gcc_64/mkspecs/features/exceptions.prf \
 		/usr/local/Qt/5.15.0/gcc_64/mkspecs/features/yacc.prf \
 		/usr/local/Qt/5.15.0/gcc_64/mkspecs/features/lex.prf \
-		KNN-App.pro CMainWindow.h \
+		KNN-App.pro CAboutScreen.h \
+		CMainWindow.h \
 		src_KNN/CKNN.h \
 		src_KNN/CKNNCuda.h \
 		src_KNN/CKNNParallel.h \
 		src_KNN/CKNNSerial.h \
 		src_KNN/knnCuda.h \
-		src_QCustomPlot/qcustomplot.h main.cpp \
+		src_QCustomPlot/qcustomplot.h CAboutScreen.cpp \
+		main.cpp \
 		CMainWindow.cpp \
 		src_KNN/CKNN.cpp \
 		src_KNN/CKNNCuda.cpp \
@@ -291,7 +297,7 @@ TARGET        = KNN-App
 first: all
 ####### Build rules
 
-KNN-App: ui_CMainWindow.h $(OBJECTS)  
+KNN-App: ui_CAboutScreen.h ui_CMainWindow.h $(OBJECTS)  
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
 Makefile: KNN-App.pro /usr/local/Qt/5.15.0/gcc_64/mkspecs/linux-clang/qmake.conf /usr/local/Qt/5.15.0/gcc_64/mkspecs/features/spec_pre.prf \
@@ -711,9 +717,9 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents src_KNN/knnCuda.cu $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/local/Qt/5.15.0/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents CMainWindow.h src_KNN/CKNN.h src_KNN/CKNNCuda.h src_KNN/CKNNParallel.h src_KNN/CKNNSerial.h src_KNN/knnCuda.h src_QCustomPlot/qcustomplot.h $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp CMainWindow.cpp src_KNN/CKNN.cpp src_KNN/CKNNCuda.cpp src_KNN/CKNNParallel.cpp src_KNN/CKNNSerial.cpp src_QCustomPlot/qcustomplot.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents CMainWindow.ui $(DISTDIR)/
+	$(COPY_FILE) --parents CAboutScreen.h CMainWindow.h src_KNN/CKNN.h src_KNN/CKNNCuda.h src_KNN/CKNNParallel.h src_KNN/CKNNSerial.h src_KNN/knnCuda.h src_QCustomPlot/qcustomplot.h $(DISTDIR)/
+	$(COPY_FILE) --parents CAboutScreen.cpp main.cpp CMainWindow.cpp src_KNN/CKNN.cpp src_KNN/CKNNCuda.cpp src_KNN/CKNNParallel.cpp src_KNN/CKNNSerial.cpp src_QCustomPlot/qcustomplot.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents CAboutScreen.ui CMainWindow.ui $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -795,10 +801,701 @@ src_KNN/knnCuda_cuda.o: src_KNN/knnCuda.cu \
 		/usr/local/cuda/include/crt/math_functions.hpp \
 		/usr/local/cuda/include/math_constants.h \
 		/usr/local/cuda/include/device_launch_parameters.h \
-		src_KNN/knnCuda.h \
-		CMainWindow.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/QMainWindow \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qmainwindow.h \
+		/usr/local/cuda/include/thrust/device_vector.h \
+		/usr/local/cuda/include/thrust/detail/config.h \
+		/usr/local/cuda/include/thrust/version.h \
+		/usr/local/cuda/include/thrust/detail/config/config.h \
+		/usr/local/cuda/include/thrust/detail/config/simple_defines.h \
+		/usr/local/cuda/include/thrust/detail/config/compiler.h \
+		/usr/local/cuda/include/thrust/detail/config/cpp_dialect.h \
+		/usr/local/cuda/include/thrust/detail/config/cpp_compatibility.h \
+		/usr/local/cuda/include/thrust/detail/config/deprecated.h \
+		/usr/local/cuda/include/thrust/detail/config/host_system.h \
+		/usr/local/cuda/include/thrust/detail/config/device_system.h \
+		/usr/local/cuda/include/thrust/detail/config/host_device.h \
+		/usr/local/cuda/include/thrust/detail/config/debug.h \
+		/usr/local/cuda/include/thrust/detail/config/forceinline.h \
+		/usr/local/cuda/include/thrust/detail/config/exec_check_disable.h \
+		/usr/local/cuda/include/thrust/detail/config/global_workarounds.h \
+		/usr/local/cuda/include/thrust/detail/vector_base.h \
+		/usr/local/cuda/include/thrust/iterator/detail/normal_iterator.h \
+		/usr/local/cuda/include/thrust/iterator/iterator_adaptor.h \
+		/usr/local/cuda/include/thrust/iterator/iterator_facade.h \
+		/usr/local/cuda/include/thrust/detail/type_traits.h \
+		/usr/local/cuda/include/thrust/detail/type_traits/has_trivial_assign.h \
+		/usr/local/cuda/include/thrust/iterator/detail/iterator_facade_category.h \
+		/usr/local/cuda/include/thrust/iterator/detail/host_system_tag.h \
+		/usr/local/cuda/include/thrust/iterator/detail/device_system_tag.h \
+		/usr/local/cuda/include/thrust/iterator/detail/any_system_tag.h \
+		/usr/local/cuda/include/thrust/detail/execution_policy.h \
+		/usr/local/cuda/include/thrust/iterator/iterator_categories.h \
+		/usr/local/cuda/include/thrust/iterator/detail/iterator_category_with_system_and_traversal.h \
+		/usr/local/cuda/include/thrust/iterator/detail/iterator_traversal_tags.h \
+		/usr/local/cuda/include/thrust/iterator/detail/universal_categories.h \
+		/usr/local/cuda/include/thrust/iterator/detail/is_iterator_category.h \
+		/usr/local/cuda/include/thrust/iterator/detail/iterator_category_to_traversal.h \
+		/usr/local/cuda/include/thrust/iterator/detail/iterator_category_to_system.h \
+		/usr/local/cuda/include/thrust/iterator/detail/distance_from_result.h \
+		/usr/local/cuda/include/thrust/detail/use_default.h \
+		/usr/local/cuda/include/thrust/iterator/detail/iterator_adaptor_base.h \
+		/usr/local/cuda/include/thrust/iterator/iterator_traits.h \
+		/usr/local/cuda/include/thrust/type_traits/void_t.h \
+		/usr/local/cuda/include/thrust/iterator/detail/iterator_traits.inl \
+		/usr/local/cuda/include/thrust/type_traits/is_contiguous_iterator.h \
+		/usr/local/cuda/include/thrust/detail/type_traits/pointer_traits.h \
+		/usr/local/cuda/include/thrust/detail/type_traits/is_metafunction_defined.h \
+		/usr/local/cuda/include/thrust/detail/type_traits/has_nested_type.h \
+		/usr/local/cuda/include/thrust/iterator/reverse_iterator.h \
+		/usr/local/cuda/include/thrust/iterator/detail/reverse_iterator_base.h \
+		/usr/local/cuda/include/thrust/iterator/detail/reverse_iterator.inl \
+		/usr/local/cuda/include/thrust/detail/contiguous_storage.h \
+		/usr/local/cuda/include/thrust/detail/allocator/allocator_traits.h \
+		/usr/local/cuda/include/thrust/detail/type_traits/has_member_function.h \
+		/usr/local/cuda/include/thrust/detail/allocator/allocator_traits.inl \
+		/usr/local/cuda/include/thrust/detail/type_traits/is_call_possible.h \
+		/usr/local/cuda/include/thrust/detail/integer_traits.h \
+		/usr/local/cuda/include/thrust/detail/type_deduction.h \
+		/usr/local/cuda/include/thrust/detail/cpp11_required.h \
+		/usr/local/cuda/include/thrust/detail/preprocessor.h \
+		/usr/local/cuda/include/thrust/detail/contiguous_storage.inl \
+		/usr/local/cuda/include/thrust/detail/swap.h \
+		/usr/local/cuda/include/thrust/detail/allocator/copy_construct_range.h \
+		/usr/local/cuda/include/thrust/detail/allocator/copy_construct_range.inl \
+		/usr/local/cuda/include/thrust/detail/copy.h \
+		/usr/local/cuda/include/thrust/detail/copy.inl \
+		/usr/local/cuda/include/thrust/system/detail/generic/select_system.h \
+		/usr/local/cuda/include/thrust/iterator/detail/minimum_system.h \
+		/usr/local/cuda/include/thrust/detail/type_traits/minimum_type.h \
+		/usr/local/cuda/include/thrust/system/detail/generic/select_system.inl \
+		/usr/local/cuda/include/thrust/system/detail/generic/select_system_exists.h \
+		/usr/local/cuda/include/thrust/system/detail/generic/copy.h \
+		/usr/local/cuda/include/thrust/system/detail/generic/tag.h \
+		/usr/local/cuda/include/thrust/system/detail/generic/copy.inl \
+		/usr/local/cuda/include/thrust/functional.h \
+		/usr/local/cuda/include/thrust/detail/functional/placeholder.h \
+		/usr/local/cuda/include/thrust/detail/functional/actor.h \
+		/usr/local/cuda/include/thrust/tuple.h \
+		/usr/local/cuda/include/thrust/detail/tuple.inl \
+		/usr/local/cuda/include/thrust/pair.h \
+		/usr/local/cuda/include/thrust/detail/pair.inl \
+		/usr/local/cuda/include/thrust/detail/functional/value.h \
+		/usr/local/cuda/include/thrust/detail/functional/composite.h \
+		/usr/local/cuda/include/thrust/detail/functional/operators/assignment_operator.h \
+		/usr/local/cuda/include/thrust/detail/functional/operators/operator_adaptors.h \
+		/usr/local/cuda/include/thrust/detail/type_traits/result_of_adaptable_function.h \
+		/usr/local/cuda/include/thrust/detail/type_traits/function_traits.h \
+		/usr/local/cuda/include/thrust/detail/functional/actor.inl \
+		/usr/local/cuda/include/thrust/detail/functional/argument.h \
+		/usr/local/cuda/include/thrust/detail/functional.inl \
+		/usr/local/cuda/include/thrust/detail/functional/operators.h \
+		/usr/local/cuda/include/thrust/detail/functional/operators/arithmetic_operators.h \
+		/usr/local/cuda/include/thrust/detail/functional/operators/relational_operators.h \
+		/usr/local/cuda/include/thrust/detail/functional/operators/logical_operators.h \
+		/usr/local/cuda/include/thrust/detail/functional/operators/bitwise_operators.h \
+		/usr/local/cuda/include/thrust/detail/functional/operators/compound_assignment_operators.h \
+		/usr/local/cuda/include/thrust/detail/internal_functional.h \
+		/usr/local/cuda/include/thrust/iterator/detail/tuple_of_iterator_references.h \
+		/usr/local/cuda/include/thrust/detail/reference_forward_declaration.h \
+		/usr/local/cuda/include/thrust/detail/raw_reference_cast.h \
+		/usr/local/cuda/include/thrust/detail/raw_pointer_cast.h \
+		/usr/local/cuda/include/thrust/detail/tuple_transform.h \
+		/usr/local/cuda/include/thrust/detail/tuple_meta_transform.h \
+		/usr/local/cuda/include/thrust/transform.h \
+		/usr/local/cuda/include/thrust/detail/transform.inl \
+		/usr/local/cuda/include/thrust/system/detail/generic/transform.h \
+		/usr/local/cuda/include/thrust/system/detail/generic/transform.inl \
+		/usr/local/cuda/include/thrust/for_each.h \
+		/usr/local/cuda/include/thrust/detail/for_each.inl \
+		/usr/local/cuda/include/thrust/system/detail/generic/for_each.h \
+		/usr/local/cuda/include/thrust/detail/static_assert.h \
+		/usr/local/cuda/include/thrust/system/detail/adl/for_each.h \
+		/usr/local/cuda/include/thrust/system/detail/sequential/for_each.h \
+		/usr/local/cuda/include/thrust/detail/function.h \
+		/usr/local/cuda/include/thrust/system/detail/sequential/execution_policy.h \
+		/usr/local/cuda/include/thrust/system/cpp/detail/for_each.h \
+		/usr/local/cuda/include/thrust/system/cuda/detail/for_each.h \
+		/usr/local/cuda/include/thrust/system/cuda/config.h \
+		/usr/local/cuda/include/cub/util_namespace.cuh \
+		/usr/local/cuda/include/cub/version.cuh \
+		/usr/local/cuda/include/thrust/system/cuda/detail/util.h \
+		/usr/local/cuda/include/cub/util_arch.cuh \
+		/usr/local/cuda/include/cub/util_cpp_dialect.cuh \
+		/usr/local/cuda/include/cub/util_compiler.cuh \
+		/usr/local/cuda/include/cub/util_macro.cuh \
+		/usr/local/cuda/include/thrust/system/cuda/detail/execution_policy.h \
+		/usr/local/cuda/include/thrust/detail/allocator_aware_execution_policy.h \
+		/usr/local/cuda/include/thrust/detail/execute_with_allocator_fwd.h \
+		/usr/local/cuda/include/thrust/detail/execute_with_dependencies.h \
+		/usr/local/cuda/include/thrust/type_traits/remove_cvref.h \
+		/usr/local/cuda/include/thrust/detail/alignment.h \
+		/usr/local/cuda/include/thrust/detail/dependencies_aware_execution_policy.h \
+		/usr/local/cuda/include/thrust/system_error.h \
+		/usr/local/cuda/include/thrust/system/error_code.h \
+		/usr/local/cuda/include/thrust/system/detail/errno.h \
+		/usr/local/cuda/include/thrust/system/detail/error_category.inl \
+		/usr/local/cuda/include/thrust/system/detail/error_code.inl \
+		/usr/local/cuda/include/thrust/system/detail/error_condition.inl \
+		/usr/local/cuda/include/thrust/system/system_error.h \
+		/usr/local/cuda/include/thrust/system/detail/system_error.inl \
+		/usr/local/cuda/include/thrust/system/cuda/error.h \
+		/usr/local/cuda/include/thrust/system/cuda/detail/guarded_driver_types.h \
+		/usr/local/cuda/include/thrust/system/cuda/detail/error.inl \
+		/usr/local/cuda/include/thrust/system/cuda/detail/guarded_cuda_runtime_api.h \
+		/usr/local/cuda/include/thrust/system/cuda/detail/parallel_for.h \
+		/usr/local/cuda/include/thrust/system/cuda/detail/par_to_seq.h \
+		/usr/local/cuda/include/thrust/detail/seq.h \
+		/usr/local/cuda/include/thrust/system/cuda/detail/par.h \
+		/usr/local/cuda/include/thrust/system/cuda/detail/core/agent_launcher.h \
+		/usr/local/cuda/include/thrust/system/cuda/detail/core/triple_chevron_launch.h \
+		/usr/local/cuda/include/thrust/system/cuda/detail/core/alignment.h \
+		/usr/local/cuda/include/thrust/system/cuda/detail/core/util.h \
+		/usr/local/cuda/include/cuda_occupancy.h \
+		/usr/local/cuda/include/cub/block/block_load.cuh \
+		/usr/local/cuda/include/cub/block/block_exchange.cuh \
+		/usr/local/cuda/include/cub/config.cuh \
+		/usr/local/cuda/include/cub/util_deprecated.cuh \
+		/usr/local/cuda/include/cub/util_ptx.cuh \
+		/usr/local/cuda/include/cub/util_type.cuh \
+		/usr/local/cuda/include/cuda_fp16.h \
+		/usr/local/cuda/include/cuda_fp16.hpp \
+		/usr/local/cuda/include/cub/util_debug.cuh \
+		/usr/local/cuda/include/cub/iterator/cache_modified_input_iterator.cuh \
+		/usr/local/cuda/include/cub/thread/thread_load.cuh \
+		/usr/local/cuda/include/cub/thread/thread_store.cuh \
+		/usr/local/cuda/include/cub/util_device.cuh \
+		/usr/local/cuda/include/cub/block/block_store.cuh \
+		/usr/local/cuda/include/cub/block/block_scan.cuh \
+		/usr/local/cuda/include/cub/block/specializations/block_scan_raking.cuh \
+		/usr/local/cuda/include/cub/block/block_raking_layout.cuh \
+		/usr/local/cuda/include/cub/thread/thread_reduce.cuh \
+		/usr/local/cuda/include/cub/thread/thread_operators.cuh \
+		/usr/local/cuda/include/cub/thread/thread_scan.cuh \
+		/usr/local/cuda/include/cub/warp/warp_scan.cuh \
+		/usr/local/cuda/include/cub/warp/specializations/warp_scan_shfl.cuh \
+		/usr/local/cuda/include/cub/warp/specializations/warp_scan_smem.cuh \
+		/usr/local/cuda/include/cub/block/specializations/block_scan_warp_scans.cuh \
+		/usr/local/cuda/include/thrust/distance.h \
+		/usr/local/cuda/include/thrust/detail/distance.inl \
+		/usr/local/cuda/include/thrust/advance.h \
+		/usr/local/cuda/include/thrust/detail/advance.inl \
+		/usr/local/cuda/include/thrust/system/detail/generic/advance.h \
+		/usr/local/cuda/include/thrust/system/detail/generic/advance.inl \
+		/usr/local/cuda/include/thrust/system/detail/generic/distance.h \
+		/usr/local/cuda/include/thrust/system/detail/generic/distance.inl \
+		/usr/local/cuda/include/thrust/system/omp/detail/for_each.h \
+		/usr/local/cuda/include/thrust/system/omp/detail/execution_policy.h \
+		/usr/local/cuda/include/thrust/system/cpp/detail/execution_policy.h \
+		/usr/local/cuda/include/thrust/system/tbb/detail/execution_policy.h \
+		/usr/local/cuda/include/thrust/system/omp/detail/for_each.inl \
+		/usr/local/cuda/include/thrust/system/tbb/detail/for_each.h \
+		/usr/local/cuda/include/thrust/system/tbb/detail/for_each.inl \
+		/usr/local/cuda/include/thrust/iterator/zip_iterator.h \
+		/usr/local/cuda/include/thrust/iterator/detail/zip_iterator_base.h \
+		/usr/local/cuda/include/thrust/iterator/detail/minimum_category.h \
+		/usr/local/cuda/include/thrust/iterator/detail/zip_iterator.inl \
+		/usr/local/cuda/include/thrust/system/detail/adl/transform.h \
+		/usr/local/cuda/include/thrust/system/detail/sequential/transform.h \
+		/usr/local/cuda/include/thrust/system/cpp/detail/transform.h \
+		/usr/local/cuda/include/thrust/system/cuda/detail/transform.h \
+		/usr/local/cuda/include/thrust/system/omp/detail/transform.h \
+		/usr/local/cuda/include/thrust/system/tbb/detail/transform.h \
+		/usr/local/cuda/include/thrust/system/detail/adl/copy.h \
+		/usr/local/cuda/include/thrust/system/detail/sequential/copy.h \
+		/usr/local/cuda/include/thrust/system/detail/sequential/copy.inl \
+		/usr/local/cuda/include/thrust/system/detail/sequential/general_copy.h \
+		/usr/local/cuda/include/thrust/system/detail/sequential/trivial_copy.h \
+		/usr/local/cuda/include/thrust/type_traits/is_trivially_relocatable.h \
+		/usr/local/cuda/include/thrust/system/cpp/detail/copy.h \
+		/usr/local/cuda/include/thrust/system/cuda/detail/copy.h \
+		/usr/local/cuda/include/thrust/system/cuda/detail/cross_system.h \
+		/usr/local/cuda/include/thrust/system/cuda/detail/internal/copy_device_to_device.h \
+		/usr/local/cuda/include/thrust/system/cuda/detail/internal/copy_cross_system.h \
+		/usr/local/cuda/include/thrust/system/cuda/detail/uninitialized_copy.h \
+		/usr/local/cuda/include/thrust/detail/temporary_array.h \
+		/usr/local/cuda/include/thrust/iterator/detail/tagged_iterator.h \
+		/usr/local/cuda/include/thrust/detail/allocator/temporary_allocator.h \
+		/usr/local/cuda/include/thrust/detail/allocator/tagged_allocator.h \
+		/usr/local/cuda/include/thrust/detail/allocator/tagged_allocator.inl \
+		/usr/local/cuda/include/thrust/memory.h \
+		/usr/local/cuda/include/thrust/detail/pointer.h \
+		/usr/local/cuda/include/thrust/detail/pointer.inl \
+		/usr/local/cuda/include/thrust/detail/reference.h \
+		/usr/local/cuda/include/thrust/detail/reference.inl \
+		/usr/local/cuda/include/thrust/system/detail/generic/memory.h \
+		/usr/local/cuda/include/thrust/system/detail/generic/memory.inl \
+		/usr/local/cuda/include/thrust/system/detail/adl/malloc_and_free.h \
+		/usr/local/cuda/include/thrust/system/detail/sequential/malloc_and_free.h \
+		/usr/local/cuda/include/thrust/system/cpp/detail/malloc_and_free.h \
+		/usr/local/cuda/include/thrust/system/cuda/detail/malloc_and_free.h \
+		/usr/local/cuda/include/cub/util_allocator.cuh \
+		/usr/local/cuda/include/cub/host/mutex.cuh \
+		/usr/local/cuda/include/thrust/system/detail/bad_alloc.h \
+		/usr/local/cuda/include/thrust/system/omp/detail/malloc_and_free.h \
+		/usr/local/cuda/include/thrust/system/tbb/detail/malloc_and_free.h \
+		/usr/local/cuda/include/thrust/detail/malloc_and_free.h \
+		/usr/local/cuda/include/thrust/system/detail/adl/get_value.h \
+		/usr/local/cuda/include/thrust/system/detail/sequential/get_value.h \
+		/usr/local/cuda/include/thrust/system/cpp/detail/get_value.h \
+		/usr/local/cuda/include/thrust/system/cuda/detail/get_value.h \
+		/usr/local/cuda/include/thrust/system/omp/detail/get_value.h \
+		/usr/local/cuda/include/thrust/system/tbb/detail/get_value.h \
+		/usr/local/cuda/include/thrust/system/detail/adl/assign_value.h \
+		/usr/local/cuda/include/thrust/system/detail/sequential/assign_value.h \
+		/usr/local/cuda/include/thrust/system/cpp/detail/assign_value.h \
+		/usr/local/cuda/include/thrust/system/cuda/detail/assign_value.h \
+		/usr/local/cuda/include/thrust/system/omp/detail/assign_value.h \
+		/usr/local/cuda/include/thrust/system/tbb/detail/assign_value.h \
+		/usr/local/cuda/include/thrust/system/detail/adl/iter_swap.h \
+		/usr/local/cuda/include/thrust/system/detail/sequential/iter_swap.h \
+		/usr/local/cuda/include/thrust/system/cpp/detail/iter_swap.h \
+		/usr/local/cuda/include/thrust/system/cuda/detail/iter_swap.h \
+		/usr/local/cuda/include/thrust/swap.h \
+		/usr/local/cuda/include/thrust/detail/swap.inl \
+		/usr/local/cuda/include/thrust/detail/swap_ranges.inl \
+		/usr/local/cuda/include/thrust/system/detail/generic/swap_ranges.h \
+		/usr/local/cuda/include/thrust/system/detail/generic/swap_ranges.inl \
+		/usr/local/cuda/include/thrust/system/detail/adl/swap_ranges.h \
+		/usr/local/cuda/include/thrust/system/detail/sequential/swap_ranges.h \
+		/usr/local/cuda/include/thrust/system/cpp/detail/swap_ranges.h \
+		/usr/local/cuda/include/thrust/system/cuda/detail/swap_ranges.h \
+		/usr/local/cuda/include/thrust/system/omp/detail/swap_ranges.h \
+		/usr/local/cuda/include/thrust/system/tbb/detail/swap_ranges.h \
+		/usr/local/cuda/include/thrust/system/omp/detail/iter_swap.h \
+		/usr/local/cuda/include/thrust/system/tbb/detail/iter_swap.h \
+		/usr/local/cuda/include/thrust/detail/temporary_buffer.h \
+		/usr/local/cuda/include/thrust/detail/execute_with_allocator.h \
+		/usr/local/cuda/include/thrust/detail/integer_math.h \
+		/usr/local/cuda/include/thrust/system/detail/generic/temporary_buffer.h \
+		/usr/local/cuda/include/thrust/system/detail/generic/temporary_buffer.inl \
+		/usr/local/cuda/include/thrust/system/detail/adl/temporary_buffer.h \
+		/usr/local/cuda/include/thrust/system/detail/sequential/temporary_buffer.h \
+		/usr/local/cuda/include/thrust/system/cpp/detail/temporary_buffer.h \
+		/usr/local/cuda/include/thrust/system/cuda/detail/temporary_buffer.h \
+		/usr/local/cuda/include/thrust/system/omp/detail/temporary_buffer.h \
+		/usr/local/cuda/include/thrust/system/tbb/detail/temporary_buffer.h \
+		/usr/local/cuda/include/thrust/detail/allocator/temporary_allocator.inl \
+		/usr/local/cuda/include/thrust/system/cuda/detail/terminate.h \
+		/usr/local/cuda/include/thrust/detail/allocator/no_throw_allocator.h \
+		/usr/local/cuda/include/thrust/detail/temporary_array.inl \
+		/usr/local/cuda/include/thrust/system/omp/detail/copy.h \
+		/usr/local/cuda/include/thrust/system/omp/detail/copy.inl \
+		/usr/local/cuda/include/thrust/system/tbb/detail/copy.h \
+		/usr/local/cuda/include/thrust/system/tbb/detail/copy.inl \
+		/usr/local/cuda/include/thrust/detail/allocator/default_construct_range.h \
+		/usr/local/cuda/include/thrust/detail/allocator/default_construct_range.inl \
+		/usr/local/cuda/include/thrust/uninitialized_fill.h \
+		/usr/local/cuda/include/thrust/detail/uninitialized_fill.inl \
+		/usr/local/cuda/include/thrust/system/detail/generic/uninitialized_fill.h \
+		/usr/local/cuda/include/thrust/system/detail/generic/uninitialized_fill.inl \
+		/usr/local/cuda/include/thrust/fill.h \
+		/usr/local/cuda/include/thrust/detail/fill.inl \
+		/usr/local/cuda/include/thrust/system/detail/generic/fill.h \
+		/usr/local/cuda/include/thrust/generate.h \
+		/usr/local/cuda/include/thrust/detail/generate.inl \
+		/usr/local/cuda/include/thrust/system/detail/generic/generate.h \
+		/usr/local/cuda/include/thrust/system/detail/generic/generate.inl \
+		/usr/local/cuda/include/thrust/system/detail/adl/generate.h \
+		/usr/local/cuda/include/thrust/system/detail/sequential/generate.h \
+		/usr/local/cuda/include/thrust/system/cpp/detail/generate.h \
+		/usr/local/cuda/include/thrust/system/cuda/detail/generate.h \
+		/usr/local/cuda/include/thrust/system/omp/detail/generate.h \
+		/usr/local/cuda/include/thrust/system/tbb/detail/generate.h \
+		/usr/local/cuda/include/thrust/system/detail/adl/fill.h \
+		/usr/local/cuda/include/thrust/system/detail/sequential/fill.h \
+		/usr/local/cuda/include/thrust/system/cpp/detail/fill.h \
+		/usr/local/cuda/include/thrust/system/cuda/detail/fill.h \
+		/usr/local/cuda/include/thrust/system/omp/detail/fill.h \
+		/usr/local/cuda/include/thrust/system/tbb/detail/fill.h \
+		/usr/local/cuda/include/thrust/system/detail/adl/uninitialized_fill.h \
+		/usr/local/cuda/include/thrust/system/detail/sequential/uninitialized_fill.h \
+		/usr/local/cuda/include/thrust/system/cpp/detail/uninitialized_fill.h \
+		/usr/local/cuda/include/thrust/system/cuda/detail/uninitialized_fill.h \
+		/usr/local/cuda/include/thrust/system/omp/detail/uninitialized_fill.h \
+		/usr/local/cuda/include/thrust/system/tbb/detail/uninitialized_fill.h \
+		/usr/local/cuda/include/thrust/detail/allocator/destroy_range.h \
+		/usr/local/cuda/include/thrust/detail/allocator/destroy_range.inl \
+		/usr/local/cuda/include/thrust/detail/allocator/fill_construct_range.h \
+		/usr/local/cuda/include/thrust/detail/allocator/fill_construct_range.inl \
+		/usr/local/cuda/include/thrust/detail/vector_base.inl \
+		/usr/local/cuda/include/thrust/detail/overlapped_copy.h \
+		/usr/local/cuda/include/thrust/equal.h \
+		/usr/local/cuda/include/thrust/detail/equal.inl \
+		/usr/local/cuda/include/thrust/system/detail/generic/equal.h \
+		/usr/local/cuda/include/thrust/system/detail/generic/equal.inl \
+		/usr/local/cuda/include/thrust/mismatch.h \
+		/usr/local/cuda/include/thrust/detail/mismatch.inl \
+		/usr/local/cuda/include/thrust/system/detail/generic/mismatch.h \
+		/usr/local/cuda/include/thrust/system/detail/generic/mismatch.inl \
+		/usr/local/cuda/include/thrust/find.h \
+		/usr/local/cuda/include/thrust/detail/find.inl \
+		/usr/local/cuda/include/thrust/system/detail/generic/find.h \
+		/usr/local/cuda/include/thrust/system/detail/generic/find.inl \
+		/usr/local/cuda/include/thrust/reduce.h \
+		/usr/local/cuda/include/thrust/detail/reduce.inl \
+		/usr/local/cuda/include/thrust/system/detail/generic/reduce.h \
+		/usr/local/cuda/include/thrust/system/detail/generic/reduce.inl \
+		/usr/local/cuda/include/thrust/system/detail/generic/reduce_by_key.h \
+		/usr/local/cuda/include/thrust/system/detail/generic/reduce_by_key.inl \
+		/usr/local/cuda/include/thrust/detail/type_traits/iterator/is_output_iterator.h \
+		/usr/local/cuda/include/thrust/iterator/detail/any_assign.h \
+		/usr/local/cuda/include/thrust/scatter.h \
+		/usr/local/cuda/include/thrust/detail/scatter.inl \
+		/usr/local/cuda/include/thrust/system/detail/generic/scatter.h \
+		/usr/local/cuda/include/thrust/system/detail/generic/scatter.inl \
+		/usr/local/cuda/include/thrust/iterator/permutation_iterator.h \
+		/usr/local/cuda/include/thrust/iterator/detail/permutation_iterator_base.h \
+		/usr/local/cuda/include/thrust/system/detail/adl/scatter.h \
+		/usr/local/cuda/include/thrust/system/detail/sequential/scatter.h \
+		/usr/local/cuda/include/thrust/system/cpp/detail/scatter.h \
+		/usr/local/cuda/include/thrust/system/cuda/detail/scatter.h \
+		/usr/local/cuda/include/thrust/system/omp/detail/scatter.h \
+		/usr/local/cuda/include/thrust/system/tbb/detail/scatter.h \
+		/usr/local/cuda/include/thrust/scan.h \
+		/usr/local/cuda/include/thrust/detail/scan.inl \
+		/usr/local/cuda/include/thrust/system/detail/generic/scan.h \
+		/usr/local/cuda/include/thrust/system/detail/generic/scan.inl \
+		/usr/local/cuda/include/thrust/system/detail/generic/scan_by_key.h \
+		/usr/local/cuda/include/thrust/system/detail/generic/scan_by_key.inl \
+		/usr/local/cuda/include/thrust/replace.h \
+		/usr/local/cuda/include/thrust/detail/replace.inl \
+		/usr/local/cuda/include/thrust/system/detail/generic/replace.h \
+		/usr/local/cuda/include/thrust/system/detail/generic/replace.inl \
+		/usr/local/cuda/include/thrust/system/detail/adl/replace.h \
+		/usr/local/cuda/include/thrust/system/detail/sequential/replace.h \
+		/usr/local/cuda/include/thrust/system/cpp/detail/replace.h \
+		/usr/local/cuda/include/thrust/system/cuda/detail/replace.h \
+		/usr/local/cuda/include/thrust/system/omp/detail/replace.h \
+		/usr/local/cuda/include/thrust/system/tbb/detail/replace.h \
+		/usr/local/cuda/include/thrust/system/detail/adl/scan.h \
+		/usr/local/cuda/include/thrust/system/detail/sequential/scan.h \
+		/usr/local/cuda/include/thrust/system/cpp/detail/scan.h \
+		/usr/local/cuda/include/thrust/system/cuda/detail/scan.h \
+		/usr/local/cuda/include/thrust/detail/cstdint.h \
+		/usr/local/cuda/include/cub/device/device_scan.cuh \
+		/usr/local/cuda/include/cub/device/dispatch/dispatch_scan.cuh \
+		/usr/local/cuda/include/cub/agent/agent_scan.cuh \
+		/usr/local/cuda/include/cub/agent/single_pass_scan_operators.cuh \
+		/usr/local/cuda/include/cub/warp/warp_reduce.cuh \
+		/usr/local/cuda/include/cub/warp/specializations/warp_reduce_shfl.cuh \
+		/usr/local/cuda/include/cub/warp/specializations/warp_reduce_smem.cuh \
+		/usr/local/cuda/include/cub/grid/grid_queue.cuh \
+		/usr/local/cuda/include/thrust/system/cuda/detail/dispatch.h \
+		/usr/local/cuda/include/thrust/detail/mpl/math.h \
+		/usr/local/cuda/include/thrust/detail/minmax.h \
+		/usr/local/cuda/include/thrust/system/omp/detail/scan.h \
+		/usr/local/cuda/include/thrust/system/tbb/detail/scan.h \
+		/usr/local/cuda/include/thrust/system/tbb/detail/scan.inl \
+		/usr/local/cuda/include/thrust/system/detail/adl/scan_by_key.h \
+		/usr/local/cuda/include/thrust/system/detail/sequential/scan_by_key.h \
+		/usr/local/cuda/include/thrust/system/cpp/detail/scan_by_key.h \
+		/usr/local/cuda/include/thrust/system/cuda/detail/scan_by_key.h \
+		/usr/local/cuda/include/thrust/system/cuda/execution_policy.h \
+		/usr/local/cuda/include/thrust/system/cuda/detail/adjacent_difference.h \
+		/usr/local/cuda/include/cub/device/device_select.cuh \
+		/usr/local/cuda/include/cub/device/dispatch/dispatch_select_if.cuh \
+		/usr/local/cuda/include/cub/agent/agent_select_if.cuh \
+		/usr/local/cuda/include/cub/block/block_discontinuity.cuh \
+		/usr/local/cuda/include/cub/block/block_adjacent_difference.cuh \
+		/usr/local/cuda/include/thrust/adjacent_difference.h \
+		/usr/local/cuda/include/thrust/detail/adjacent_difference.inl \
+		/usr/local/cuda/include/thrust/system/detail/generic/adjacent_difference.h \
+		/usr/local/cuda/include/thrust/system/detail/generic/adjacent_difference.inl \
+		/usr/local/cuda/include/thrust/system/detail/adl/adjacent_difference.h \
+		/usr/local/cuda/include/thrust/system/detail/sequential/adjacent_difference.h \
+		/usr/local/cuda/include/thrust/system/cpp/detail/adjacent_difference.h \
+		/usr/local/cuda/include/thrust/system/omp/detail/adjacent_difference.h \
+		/usr/local/cuda/include/thrust/system/tbb/detail/adjacent_difference.h \
+		/usr/local/cuda/include/thrust/system/cuda/detail/copy_if.h \
+		/usr/local/cuda/include/thrust/copy.h \
+		/usr/local/cuda/include/thrust/detail/copy_if.h \
+		/usr/local/cuda/include/thrust/detail/copy_if.inl \
+		/usr/local/cuda/include/thrust/system/detail/generic/copy_if.h \
+		/usr/local/cuda/include/thrust/system/detail/generic/copy_if.inl \
+		/usr/local/cuda/include/thrust/system/detail/adl/copy_if.h \
+		/usr/local/cuda/include/thrust/system/detail/sequential/copy_if.h \
+		/usr/local/cuda/include/thrust/system/cpp/detail/copy_if.h \
+		/usr/local/cuda/include/thrust/system/omp/detail/copy_if.h \
+		/usr/local/cuda/include/thrust/system/omp/detail/copy_if.inl \
+		/usr/local/cuda/include/thrust/system/tbb/detail/copy_if.h \
+		/usr/local/cuda/include/thrust/system/tbb/detail/copy_if.inl \
+		/usr/local/cuda/include/thrust/system/cuda/detail/count.h \
+		/usr/local/cuda/include/thrust/system/cuda/detail/reduce.h \
+		/usr/local/cuda/include/cub/device/device_reduce.cuh \
+		/usr/local/cuda/include/cub/iterator/arg_index_input_iterator.cuh \
+		/usr/local/cuda/include/cub/device/dispatch/dispatch_reduce.cuh \
+		/usr/local/cuda/include/cub/agent/agent_reduce.cuh \
+		/usr/local/cuda/include/cub/block/block_reduce.cuh \
+		/usr/local/cuda/include/cub/block/specializations/block_reduce_raking.cuh \
+		/usr/local/cuda/include/cub/block/specializations/block_reduce_raking_commutative_only.cuh \
+		/usr/local/cuda/include/cub/block/specializations/block_reduce_warp_reductions.cuh \
+		/usr/local/cuda/include/cub/grid/grid_mapping.cuh \
+		/usr/local/cuda/include/cub/grid/grid_even_share.cuh \
+		/usr/local/cuda/include/cub/device/dispatch/dispatch_reduce_by_key.cuh \
+		/usr/local/cuda/include/cub/agent/agent_reduce_by_key.cuh \
+		/usr/local/cuda/include/cub/iterator/constant_input_iterator.cuh \
+		/usr/local/cuda/include/thrust/system/cuda/detail/make_unsigned_special.h \
+		/usr/local/cuda/include/thrust/system/cuda/detail/equal.h \
+		/usr/local/cuda/include/thrust/system/cuda/detail/mismatch.h \
+		/usr/local/cuda/include/thrust/system/cuda/detail/find.h \
+		/usr/local/cuda/include/thrust/system/cuda/detail/extrema.h \
+		/usr/local/cuda/include/thrust/extrema.h \
+		/usr/local/cuda/include/thrust/detail/extrema.inl \
+		/usr/local/cuda/include/thrust/system/detail/generic/extrema.h \
+		/usr/local/cuda/include/thrust/system/detail/generic/extrema.inl \
+		/usr/local/cuda/include/thrust/detail/get_iterator_value.h \
+		/usr/local/cuda/include/thrust/execution_policy.h \
+		/usr/local/cuda/include/thrust/transform_reduce.h \
+		/usr/local/cuda/include/thrust/detail/transform_reduce.inl \
+		/usr/local/cuda/include/thrust/system/detail/generic/transform_reduce.h \
+		/usr/local/cuda/include/thrust/system/detail/generic/transform_reduce.inl \
+		/usr/local/cuda/include/thrust/iterator/transform_iterator.h \
+		/usr/local/cuda/include/thrust/iterator/detail/transform_iterator.inl \
+		/usr/local/cuda/include/thrust/system/detail/adl/transform_reduce.h \
+		/usr/local/cuda/include/thrust/system/detail/sequential/transform_reduce.h \
+		/usr/local/cuda/include/thrust/system/cpp/detail/transform_reduce.h \
+		/usr/local/cuda/include/thrust/system/cuda/detail/transform_reduce.h \
+		/usr/local/cuda/include/thrust/system/omp/detail/transform_reduce.h \
+		/usr/local/cuda/include/thrust/system/tbb/detail/transform_reduce.h \
+		/usr/local/cuda/include/thrust/iterator/counting_iterator.h \
+		/usr/local/cuda/include/thrust/iterator/detail/counting_iterator.inl \
+		/usr/local/cuda/include/thrust/detail/numeric_traits.h \
+		/usr/local/cuda/include/thrust/system/detail/adl/extrema.h \
+		/usr/local/cuda/include/thrust/system/detail/sequential/extrema.h \
+		/usr/local/cuda/include/thrust/system/cpp/detail/extrema.h \
+		/usr/local/cuda/include/thrust/system/omp/detail/extrema.h \
+		/usr/local/cuda/include/thrust/system/tbb/detail/extrema.h \
+		/usr/local/cuda/include/thrust/system/cuda/detail/gather.h \
+		/usr/local/cuda/include/thrust/system/cuda/detail/inner_product.h \
+		/usr/local/cuda/include/thrust/system/cuda/detail/partition.h \
+		/usr/local/cuda/include/thrust/system/cuda/detail/reverse.h \
+		/usr/local/cuda/include/cub/device/device_partition.cuh \
+		/usr/local/cuda/include/thrust/partition.h \
+		/usr/local/cuda/include/thrust/detail/partition.inl \
+		/usr/local/cuda/include/thrust/system/detail/generic/partition.h \
+		/usr/local/cuda/include/thrust/system/detail/generic/partition.inl \
+		/usr/local/cuda/include/thrust/remove.h \
+		/usr/local/cuda/include/thrust/detail/remove.inl \
+		/usr/local/cuda/include/thrust/system/detail/generic/remove.h \
+		/usr/local/cuda/include/thrust/system/detail/generic/remove.inl \
+		/usr/local/cuda/include/thrust/system/detail/adl/remove.h \
+		/usr/local/cuda/include/thrust/system/detail/sequential/remove.h \
+		/usr/local/cuda/include/thrust/system/cpp/detail/remove.h \
+		/usr/local/cuda/include/thrust/system/cuda/detail/remove.h \
+		/usr/local/cuda/include/thrust/system/omp/detail/remove.h \
+		/usr/local/cuda/include/thrust/system/omp/detail/remove.inl \
+		/usr/local/cuda/include/thrust/system/tbb/detail/remove.h \
+		/usr/local/cuda/include/thrust/system/tbb/detail/remove.inl \
+		/usr/local/cuda/include/thrust/count.h \
+		/usr/local/cuda/include/thrust/detail/count.inl \
+		/usr/local/cuda/include/thrust/system/detail/generic/count.h \
+		/usr/local/cuda/include/thrust/system/detail/generic/count.inl \
+		/usr/local/cuda/include/thrust/system/detail/adl/count.h \
+		/usr/local/cuda/include/thrust/system/detail/sequential/count.h \
+		/usr/local/cuda/include/thrust/system/cpp/detail/count.h \
+		/usr/local/cuda/include/thrust/system/omp/detail/count.h \
+		/usr/local/cuda/include/thrust/system/tbb/detail/count.h \
+		/usr/local/cuda/include/thrust/sort.h \
+		/usr/local/cuda/include/thrust/detail/sort.inl \
+		/usr/local/cuda/include/thrust/system/detail/generic/sort.h \
+		/usr/local/cuda/include/thrust/system/detail/generic/sort.inl \
+		/usr/local/cuda/include/thrust/system/detail/adl/sort.h \
+		/usr/local/cuda/include/thrust/system/detail/sequential/sort.h \
+		/usr/local/cuda/include/thrust/system/detail/sequential/sort.inl \
+		/usr/local/cuda/include/thrust/reverse.h \
+		/usr/local/cuda/include/thrust/detail/reverse.inl \
+		/usr/local/cuda/include/thrust/system/detail/generic/reverse.h \
+		/usr/local/cuda/include/thrust/system/detail/generic/reverse.inl \
+		/usr/local/cuda/include/thrust/system/detail/adl/reverse.h \
+		/usr/local/cuda/include/thrust/system/detail/sequential/reverse.h \
+		/usr/local/cuda/include/thrust/system/cpp/detail/reverse.h \
+		/usr/local/cuda/include/thrust/system/omp/detail/reverse.h \
+		/usr/local/cuda/include/thrust/system/tbb/detail/reverse.h \
+		/usr/local/cuda/include/thrust/system/detail/sequential/stable_merge_sort.h \
+		/usr/local/cuda/include/thrust/system/detail/sequential/stable_merge_sort.inl \
+		/usr/local/cuda/include/thrust/merge.h \
+		/usr/local/cuda/include/thrust/detail/merge.inl \
+		/usr/local/cuda/include/thrust/system/detail/generic/merge.h \
+		/usr/local/cuda/include/thrust/system/detail/generic/merge.inl \
+		/usr/local/cuda/include/thrust/system/detail/adl/merge.h \
+		/usr/local/cuda/include/thrust/system/detail/sequential/merge.h \
+		/usr/local/cuda/include/thrust/system/detail/sequential/merge.inl \
+		/usr/local/cuda/include/thrust/system/cpp/detail/merge.h \
+		/usr/local/cuda/include/thrust/system/cuda/detail/merge.h \
+		/usr/local/cuda/include/thrust/system/omp/detail/merge.h \
+		/usr/local/cuda/include/thrust/system/tbb/detail/merge.h \
+		/usr/local/cuda/include/thrust/system/tbb/detail/merge.inl \
+		/usr/local/cuda/include/thrust/binary_search.h \
+		/usr/local/cuda/include/thrust/detail/binary_search.inl \
+		/usr/local/cuda/include/thrust/system/detail/generic/binary_search.h \
+		/usr/local/cuda/include/thrust/system/detail/generic/binary_search.inl \
+		/usr/local/cuda/include/thrust/system/detail/generic/scalar/binary_search.h \
+		/usr/local/cuda/include/thrust/system/detail/generic/scalar/binary_search.inl \
+		/usr/local/cuda/include/thrust/system/detail/adl/binary_search.h \
+		/usr/local/cuda/include/thrust/system/detail/sequential/binary_search.h \
+		/usr/local/cuda/include/thrust/system/cpp/detail/binary_search.h \
+		/usr/local/cuda/include/thrust/system/cuda/detail/binary_search.h \
+		/usr/local/cuda/include/thrust/system/omp/detail/binary_search.h \
+		/usr/local/cuda/include/thrust/system/tbb/detail/binary_search.h \
+		/usr/local/cuda/include/thrust/system/detail/sequential/insertion_sort.h \
+		/usr/local/cuda/include/thrust/system/detail/sequential/copy_backward.h \
+		/usr/local/cuda/include/thrust/system/detail/sequential/stable_primitive_sort.h \
+		/usr/local/cuda/include/thrust/system/detail/sequential/stable_primitive_sort.inl \
+		/usr/local/cuda/include/thrust/system/detail/sequential/stable_radix_sort.h \
+		/usr/local/cuda/include/thrust/system/detail/sequential/stable_radix_sort.inl \
+		/usr/local/cuda/include/thrust/system/detail/sequential/partition.h \
+		/usr/local/cuda/include/thrust/system/cpp/detail/sort.h \
+		/usr/local/cuda/include/thrust/system/cuda/detail/sort.h \
+		/usr/local/cuda/include/cub/device/device_radix_sort.cuh \
+		/usr/local/cuda/include/cub/device/dispatch/dispatch_radix_sort.cuh \
+		/usr/local/cuda/include/cub/agent/agent_radix_sort_upsweep.cuh \
+		/usr/local/cuda/include/cub/agent/agent_radix_sort_downsweep.cuh \
+		/usr/local/cuda/include/cub/block/block_radix_rank.cuh \
+		/usr/local/cuda/include/cub/block/block_radix_sort.cuh \
+		/usr/local/cuda/include/thrust/detail/trivial_sequence.h \
+		/usr/local/cuda/include/thrust/sequence.h \
+		/usr/local/cuda/include/thrust/detail/sequence.inl \
+		/usr/local/cuda/include/thrust/system/detail/generic/sequence.h \
+		/usr/local/cuda/include/thrust/system/detail/generic/sequence.inl \
+		/usr/local/cuda/include/thrust/tabulate.h \
+		/usr/local/cuda/include/thrust/detail/tabulate.inl \
+		/usr/local/cuda/include/thrust/system/detail/generic/tabulate.h \
+		/usr/local/cuda/include/thrust/system/detail/generic/tabulate.inl \
+		/usr/local/cuda/include/thrust/system/detail/adl/tabulate.h \
+		/usr/local/cuda/include/thrust/system/detail/sequential/tabulate.h \
+		/usr/local/cuda/include/thrust/system/cpp/detail/tabulate.h \
+		/usr/local/cuda/include/thrust/system/cuda/detail/tabulate.h \
+		/usr/local/cuda/include/thrust/system/omp/detail/tabulate.h \
+		/usr/local/cuda/include/thrust/system/tbb/detail/tabulate.h \
+		/usr/local/cuda/include/thrust/system/detail/adl/sequence.h \
+		/usr/local/cuda/include/thrust/system/detail/sequential/sequence.h \
+		/usr/local/cuda/include/thrust/system/cpp/detail/sequence.h \
+		/usr/local/cuda/include/thrust/system/cuda/detail/sequence.h \
+		/usr/local/cuda/include/thrust/system/omp/detail/sequence.h \
+		/usr/local/cuda/include/thrust/system/tbb/detail/sequence.h \
+		/usr/local/cuda/include/thrust/system/omp/detail/sort.h \
+		/usr/local/cuda/include/thrust/system/omp/detail/sort.inl \
+		/usr/local/cuda/include/thrust/system/omp/detail/default_decomposition.h \
+		/usr/local/cuda/include/thrust/system/detail/internal/decompose.h \
+		/usr/local/cuda/include/thrust/system/omp/detail/default_decomposition.inl \
+		/usr/local/cuda/include/thrust/system/tbb/detail/sort.h \
+		/usr/local/cuda/include/thrust/system/tbb/detail/sort.inl \
+		/usr/local/cuda/include/thrust/system/detail/adl/partition.h \
+		/usr/local/cuda/include/thrust/system/cpp/detail/partition.h \
+		/usr/local/cuda/include/thrust/system/omp/detail/partition.h \
+		/usr/local/cuda/include/thrust/system/omp/detail/partition.inl \
+		/usr/local/cuda/include/thrust/system/tbb/detail/partition.h \
+		/usr/local/cuda/include/thrust/system/tbb/detail/partition.inl \
+		/usr/local/cuda/include/thrust/system/cuda/detail/reduce_by_key.h \
+		/usr/local/cuda/include/thrust/system/cuda/detail/transform_scan.h \
+		/usr/local/cuda/include/thrust/system/cuda/detail/unique.h \
+		/usr/local/cuda/include/thrust/unique.h \
+		/usr/local/cuda/include/thrust/detail/unique.inl \
+		/usr/local/cuda/include/thrust/system/detail/generic/unique.h \
+		/usr/local/cuda/include/thrust/system/detail/generic/unique.inl \
+		/usr/local/cuda/include/thrust/detail/range/head_flags.h \
+		/usr/local/cuda/include/thrust/system/detail/generic/unique_by_key.h \
+		/usr/local/cuda/include/thrust/system/detail/generic/unique_by_key.inl \
+		/usr/local/cuda/include/thrust/system/detail/adl/unique.h \
+		/usr/local/cuda/include/thrust/system/detail/sequential/unique.h \
+		/usr/local/cuda/include/thrust/system/cpp/detail/unique.h \
+		/usr/local/cuda/include/thrust/system/omp/detail/unique.h \
+		/usr/local/cuda/include/thrust/system/omp/detail/unique.inl \
+		/usr/local/cuda/include/thrust/system/tbb/detail/unique.h \
+		/usr/local/cuda/include/thrust/system/tbb/detail/unique.inl \
+		/usr/local/cuda/include/thrust/system/detail/adl/unique_by_key.h \
+		/usr/local/cuda/include/thrust/system/detail/sequential/unique_by_key.h \
+		/usr/local/cuda/include/thrust/system/cpp/detail/unique_by_key.h \
+		/usr/local/cuda/include/thrust/system/cuda/detail/unique_by_key.h \
+		/usr/local/cuda/include/thrust/system/omp/detail/unique_by_key.h \
+		/usr/local/cuda/include/thrust/system/omp/detail/unique_by_key.inl \
+		/usr/local/cuda/include/thrust/system/tbb/detail/unique_by_key.h \
+		/usr/local/cuda/include/thrust/system/tbb/detail/unique_by_key.inl \
+		/usr/local/cuda/include/thrust/system/cuda/detail/set_operations.h \
+		/usr/local/cuda/include/thrust/set_operations.h \
+		/usr/local/cuda/include/thrust/detail/set_operations.inl \
+		/usr/local/cuda/include/thrust/system/detail/generic/set_operations.h \
+		/usr/local/cuda/include/thrust/system/detail/generic/set_operations.inl \
+		/usr/local/cuda/include/thrust/iterator/constant_iterator.h \
+		/usr/local/cuda/include/thrust/iterator/detail/constant_iterator_base.h \
+		/usr/local/cuda/include/thrust/system/detail/adl/set_operations.h \
+		/usr/local/cuda/include/thrust/system/detail/sequential/set_operations.h \
+		/usr/local/cuda/include/thrust/system/cpp/detail/set_operations.h \
+		/usr/local/cuda/include/thrust/system/omp/detail/set_operations.h \
+		/usr/local/cuda/include/thrust/system/tbb/detail/set_operations.h \
+		/usr/local/cuda/include/thrust/system/omp/detail/scan_by_key.h \
+		/usr/local/cuda/include/thrust/system/tbb/detail/scan_by_key.h \
+		/usr/local/cuda/include/thrust/system/detail/adl/reduce.h \
+		/usr/local/cuda/include/thrust/system/detail/sequential/reduce.h \
+		/usr/local/cuda/include/thrust/system/cpp/detail/reduce.h \
+		/usr/local/cuda/include/thrust/system/omp/detail/reduce.h \
+		/usr/local/cuda/include/thrust/system/omp/detail/reduce.inl \
+		/usr/local/cuda/include/thrust/system/omp/detail/reduce_intervals.h \
+		/usr/local/cuda/include/thrust/system/omp/detail/reduce_intervals.inl \
+		/usr/local/cuda/include/thrust/system/tbb/detail/reduce.h \
+		/usr/local/cuda/include/thrust/system/tbb/detail/reduce.inl \
+		/usr/local/cuda/include/thrust/system/detail/adl/reduce_by_key.h \
+		/usr/local/cuda/include/thrust/system/detail/sequential/reduce_by_key.h \
+		/usr/local/cuda/include/thrust/detail/type_traits/algorithm/intermediate_type_from_function_and_iterators.h \
+		/usr/local/cuda/include/thrust/system/cpp/detail/reduce_by_key.h \
+		/usr/local/cuda/include/thrust/system/omp/detail/reduce_by_key.h \
+		/usr/local/cuda/include/thrust/system/omp/detail/reduce_by_key.inl \
+		/usr/local/cuda/include/thrust/system/tbb/detail/reduce_by_key.h \
+		/usr/local/cuda/include/thrust/system/tbb/detail/reduce_by_key.inl \
+		/usr/local/cuda/include/thrust/system/tbb/detail/reduce_intervals.h \
+		/usr/local/cuda/include/thrust/system/cpp/memory.h \
+		/usr/local/cuda/include/thrust/system/cpp/memory_resource.h \
+		/usr/local/cuda/include/thrust/mr/new.h \
+		/usr/local/cuda/include/thrust/mr/memory_resource.h \
+		/usr/local/cuda/include/thrust/mr/detail/config.h \
+		/usr/local/cuda/include/thrust/mr/fancy_pointer_resource.h \
+		/usr/local/cuda/include/thrust/mr/validator.h \
+		/usr/local/cuda/include/thrust/system/cpp/pointer.h \
+		/usr/local/cuda/include/thrust/system/cpp/detail/pointer.inl \
+		/usr/local/cuda/include/thrust/mr/allocator.h \
+		/usr/local/cuda/include/thrust/mr/polymorphic_adaptor.h \
+		/usr/local/cuda/include/thrust/system/cpp/detail/memory.inl \
+		/usr/local/cuda/include/thrust/detail/range/tail_flags.h \
+		/usr/local/cuda/include/thrust/system/detail/adl/find.h \
+		/usr/local/cuda/include/thrust/system/detail/sequential/find.h \
+		/usr/local/cuda/include/thrust/system/cpp/detail/find.h \
+		/usr/local/cuda/include/thrust/system/omp/detail/find.h \
+		/usr/local/cuda/include/thrust/system/tbb/detail/find.h \
+		/usr/local/cuda/include/thrust/system/detail/adl/mismatch.h \
+		/usr/local/cuda/include/thrust/system/detail/sequential/mismatch.h \
+		/usr/local/cuda/include/thrust/system/cpp/detail/mismatch.h \
+		/usr/local/cuda/include/thrust/system/omp/detail/mismatch.h \
+		/usr/local/cuda/include/thrust/system/tbb/detail/mismatch.h \
+		/usr/local/cuda/include/thrust/system/detail/adl/equal.h \
+		/usr/local/cuda/include/thrust/system/detail/sequential/equal.h \
+		/usr/local/cuda/include/thrust/system/cpp/detail/equal.h \
+		/usr/local/cuda/include/thrust/system/omp/detail/equal.h \
+		/usr/local/cuda/include/thrust/system/tbb/detail/equal.h \
+		/usr/local/cuda/include/thrust/device_allocator.h \
+		/usr/local/cuda/include/thrust/device_ptr.h \
+		/usr/local/cuda/include/thrust/detail/device_ptr.inl \
+		/usr/local/cuda/include/thrust/device_reference.h \
+		/usr/local/cuda/include/thrust/detail/device_reference.inl \
+		/usr/local/cuda/include/thrust/memory/detail/device_system_resource.h \
+		/usr/local/cuda/include/thrust/detail/device_vector.inl \
+		/usr/local/cuda/include/thrust/host_vector.h \
+		/usr/local/cuda/include/thrust/detail/host_vector.inl \
+		src_KNN/knnCuda.h
+	/usr/local/cuda/bin/nvcc --use_fast_math -I"/usr/local/cuda/include" --machine 64 -arch=sm_52 -c -o src_KNN/knnCuda_cuda.o src_KNN/knnCuda.cu
+
+compiler_rcc_make_all:
+compiler_rcc_clean:
+compiler_moc_predefs_make_all: moc_predefs.h
+compiler_moc_predefs_clean:
+	-$(DEL_FILE) moc_predefs.h
+moc_predefs.h: /usr/local/Qt/5.15.0/gcc_64/mkspecs/features/data/dummy.cpp
+	clang++ -pipe -O2 -std=gnu++11 -Wall -Wextra -dM -E -o moc_predefs.h /usr/local/Qt/5.15.0/gcc_64/mkspecs/features/data/dummy.cpp
+
+compiler_moc_header_make_all: moc_CAboutScreen.cpp moc_CMainWindow.cpp moc_qcustomplot.cpp
+compiler_moc_header_clean:
+	-$(DEL_FILE) moc_CAboutScreen.cpp moc_CMainWindow.cpp moc_qcustomplot.cpp
+moc_CAboutScreen.cpp: CAboutScreen.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/QDialog \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qdialog.h \
 		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
 		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qtguiglobal.h \
 		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qglobal.h \
@@ -901,423 +1598,10 @@ src_KNN/knnCuda_cuda.o: src_KNN/knnCuda.cu \
 		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qfiledevice.h \
 		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qvector2d.h \
 		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qtouchdevice.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qtabwidget.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qicon.h \
-		src_QCustomPlot/qcustomplot.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/QObject \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/QPointer \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qpointer.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/QSharedPointer \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/QTimer \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qtimer.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qbasictimer.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/QPainter \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qpainter.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qtextoption.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qpen.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/QPaintEvent \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/QMouseEvent \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/QWheelEvent \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/QPixmap \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/QVector \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/QString \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/QDateTime \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qdatetime.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/QMultiMap \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/QFlags \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/QDebug \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/QStack \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qstack.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/QCache \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qcache.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/QMargins \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qmath.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/QOpenGLContext \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qopenglcontext.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/QScopedPointer \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/QSurfaceFormat \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qsurfaceformat.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qopengl.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qt_windows.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qopengles2ext.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qopenglext.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qopenglversionfunctions.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/QOpenGLFramebufferObject \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qopenglframebufferobject.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/QOffscreenSurface \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qoffscreensurface.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qsurface.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/QWindow \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qwindow.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/QEvent \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/QRect \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtOpenGL/QGLPixelBuffer \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtOpenGL/qglpixelbuffer.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtOpenGL/qgl.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qpaintengine.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtOpenGL/qglcolormap.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtOpenGL/qtopenglglobal.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/QtNumeric \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/QWidget \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtPrintSupport/QtPrintSupport \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtPrintSupport/QtPrintSupportDepends \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/QtCore \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/QtCoreDepends \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qabstractanimation.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qabstracteventdispatcher.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qeventloop.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qabstractitemmodel.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qabstractnativeeventfilter.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qabstractproxymodel.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qabstractstate.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qabstracttransition.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qanimationgroup.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qarraydataops.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qarraydatapointer.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qbitarray.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qbuffer.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qbytearraymatcher.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qcalendar.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qcborarray.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qcborvalue.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qcborcommon.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qregularexpression.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/quuid.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qcbormap.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qcborstream.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qcborstreamreader.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qfloat16.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qcborstreamwriter.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qcollator.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qcommandlineoption.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qcommandlineparser.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qcoreapplication.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qconcatenatetablesproxymodel.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qcryptographichash.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qdeadlinetimer.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qelapsedtimer.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qdir.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qfileinfo.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qdiriterator.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qeasingcurve.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qendian.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qeventtransition.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qexception.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qfactoryinterface.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qfileselector.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/QStringList \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qfilesystemwatcher.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qfinalstate.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qfuture.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qfutureinterface.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qrunnable.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qresultstore.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qfuturesynchronizer.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qfuturewatcher.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qhistorystate.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qidentityproxymodel.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qisenum.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qitemselectionmodel.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qjsonarray.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qjsonvalue.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qjsondocument.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qjsonobject.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qlibrary.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qlibraryinfo.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qversionnumber.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qlinkedlist.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qlockfile.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qloggingcategory.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qmessageauthenticationcode.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qmetaobject.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qmimedata.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qmimedatabase.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qmimetype.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qobjectcleanuphandler.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qoperatingsystemversion.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qparallelanimationgroup.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qpauseanimation.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qplugin.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qpluginloader.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qprocess.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qpropertyanimation.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qvariantanimation.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qqueue.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qrandom.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qreadwritelock.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qresource.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qsavefile.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qscopedvaluerollback.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qscopeguard.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qsemaphore.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qsequentialanimationgroup.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qsettings.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qsharedmemory.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qsignalmapper.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qsignaltransition.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qsocketnotifier.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qsortfilterproxymodel.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qstandardpaths.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qstate.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qstatemachine.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qstorageinfo.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qstringlistmodel.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qsystemsemaphore.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qtemporarydir.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qtemporaryfile.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qtextboundaryfinder.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qtextcodec.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qthread.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qthreadpool.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qthreadstorage.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qtimeline.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qtimezone.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qtranslator.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qtransposeproxymodel.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qtypetraits.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qwaitcondition.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/QDeadlineTimer \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qwineventnotifier.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qxmlstream.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qtcoreversion.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/QtGui \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/QtGuiDepends \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qabstracttextdocumentlayout.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qtextlayout.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qtextformat.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qglyphrun.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qrawfont.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qfontdatabase.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qtextcursor.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qtextdocument.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qaccessible.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qaccessiblebridge.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qaccessibleobject.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qaccessibleplugin.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qbackingstore.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qbitmap.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qclipboard.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qcolorspace.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qcolortransform.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qdesktopservices.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qdrag.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qgenericmatrix.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qgenericplugin.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qgenericpluginfactory.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qguiapplication.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qinputmethod.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qiconengine.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qiconengineplugin.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qimageiohandler.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qimagereader.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qimagewriter.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qmatrix4x4.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qvector3d.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qvector4d.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qquaternion.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qmovie.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qopenglbuffer.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qopengldebug.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qopenglextrafunctions.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qopenglfunctions.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qopenglpaintdevice.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qopenglpixeltransferoptions.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/QSharedDataPointer \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qopenglshaderprogram.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qopengltexture.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qopengltextureblitter.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/QMatrix3x3 \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/QMatrix4x4 \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qopengltimerquery.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qopenglvertexarrayobject.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qopenglwindow.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/QPaintDeviceWindow \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qpaintdevicewindow.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/QPaintDevice \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/QImage \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qpagedpaintdevice.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qpagelayout.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qpagesize.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qpainterpath.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qpdfwriter.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qpicture.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qpictureformatplugin.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qpixmapcache.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qrasterwindow.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qscreen.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/QList \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/QSize \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/QSizeF \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/QTransform \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qsessionmanager.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qstandarditemmodel.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qstatictext.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qstylehints.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qsyntaxhighlighter.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qtextobject.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qtextdocumentfragment.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qtextdocumentwriter.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qtextlist.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qtexttable.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qvalidator.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qtguiversion.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/QtWidgets \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/QtWidgetsDepends \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qabstractbutton.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qstyleoption.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qabstractspinbox.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qslider.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qabstractslider.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qstyle.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qtabbar.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qrubberband.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qframe.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qabstractitemview.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qabstractscrollarea.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qaccessiblewidget.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qaction.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qactiongroup.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qapplication.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qdesktopwidget.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qboxlayout.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qlayout.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qlayoutitem.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qgridlayout.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qbuttongroup.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qcalendarwidget.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qcheckbox.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qcolordialog.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qdialog.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qcolormap.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qcolumnview.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qcombobox.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qcommandlinkbutton.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qpushbutton.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qcommonstyle.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qcompleter.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qdatawidgetmapper.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qdatetimeedit.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qdial.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qdialogbuttonbox.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qdirmodel.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qfileiconprovider.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qdockwidget.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qdrawutil.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qerrormessage.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qfiledialog.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qfilesystemmodel.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qfocusframe.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qfontcombobox.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qfontdialog.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qformlayout.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/QLayout \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qgesture.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qgesturerecognizer.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qgraphicsanchorlayout.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qgraphicsitem.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qgraphicslayout.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qgraphicslayoutitem.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qgraphicseffect.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qgraphicsgridlayout.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qgraphicsitemanimation.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qgraphicslinearlayout.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qgraphicsproxywidget.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qgraphicswidget.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qgraphicsscene.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qgraphicssceneevent.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qgraphicstransform.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/QVector3D \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qgraphicsview.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qscrollarea.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qgroupbox.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qheaderview.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qinputdialog.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qlineedit.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qitemdelegate.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qitemeditorfactory.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qkeyeventtransition.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qkeysequenceedit.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qlabel.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qlcdnumber.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qlistview.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qlistwidget.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qmdiarea.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qmdisubwindow.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qmenu.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qmenubar.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qmessagebox.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qmouseeventtransition.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qopenglwidget.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qplaintextedit.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qtextedit.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qprogressbar.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qprogressdialog.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qproxystyle.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/QCommonStyle \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qradiobutton.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qscrollbar.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qscroller.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/QPointF \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/QScrollerProperties \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qscrollerproperties.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/QMetaType \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/QVariant \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qshortcut.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qsizegrip.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qspinbox.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qsplashscreen.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qsplitter.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qstackedlayout.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qstackedwidget.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qstatusbar.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qstyleditemdelegate.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qstylefactory.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qstylepainter.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qstyleplugin.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qsystemtrayicon.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qtableview.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qtablewidget.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qtextbrowser.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qtoolbar.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qtoolbox.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qtoolbutton.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qtooltip.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qtreeview.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qtreewidget.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qtreewidgetitemiterator.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qundogroup.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qundostack.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qundoview.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qwhatsthis.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qwidgetaction.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qwizard.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qtwidgetsversion.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtPrintSupport/qtprintsupportglobal.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtPrintSupport/qtprintsupport-config.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtPrintSupport/qabstractprintdialog.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtPrintSupport/qpagesetupdialog.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtPrintSupport/qprintdialog.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtPrintSupport/qprintengine.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtPrintSupport/qprinter.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtPrintSupport/qprinterinfo.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/QPair \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtPrintSupport/qprintpreviewdialog.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtPrintSupport/qprintpreviewwidget.h \
-		/usr/local/Qt/5.15.0/gcc_64/include/QtPrintSupport/qtprintsupportversion.h
-	/usr/local/cuda/bin/nvcc --use_fast_math -I"/usr/local/cuda/include" --machine 64 -arch=sm_52 -c -o src_KNN/knnCuda_cuda.o src_KNN/knnCuda.cu
+		moc_predefs.h \
+		/usr/local/Qt/5.15.0/gcc_64/bin/moc
+	/usr/local/Qt/5.15.0/gcc_64/bin/moc $(DEFINES) --include /home/rodrigo/Mestrado/KNN-CPP/KNN-App/moc_predefs.h -I/usr/local/Qt/5.15.0/gcc_64/mkspecs/linux-clang -I/home/rodrigo/Mestrado/KNN-CPP/KNN-App -I/usr/local/cuda/include -I/usr/local/Qt/5.15.0/gcc_64/include -I/usr/local/Qt/5.15.0/gcc_64/include/QtPrintSupport -I/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets -I/usr/local/Qt/5.15.0/gcc_64/include/QtGui -I/usr/local/Qt/5.15.0/gcc_64/include/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/local/include -I/usr/lib/llvm-10/lib/clang/10.0.0/include -I/usr/include/x86_64-linux-gnu -I/usr/include CAboutScreen.h -o moc_CAboutScreen.cpp
 
-compiler_rcc_make_all:
-compiler_rcc_clean:
-compiler_moc_predefs_make_all: moc_predefs.h
-compiler_moc_predefs_clean:
-	-$(DEL_FILE) moc_predefs.h
-moc_predefs.h: /usr/local/Qt/5.15.0/gcc_64/mkspecs/features/data/dummy.cpp
-	clang++ -pipe -O2 -std=gnu++11 -Wall -Wextra -dM -E -o moc_predefs.h /usr/local/Qt/5.15.0/gcc_64/mkspecs/features/data/dummy.cpp
-
-compiler_moc_header_make_all: moc_CMainWindow.cpp moc_qcustomplot.cpp
-compiler_moc_header_clean:
-	-$(DEL_FILE) moc_CMainWindow.cpp moc_qcustomplot.cpp
 moc_CMainWindow.cpp: CMainWindow.h \
 		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/QMainWindow \
 		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qmainwindow.h \
@@ -2346,9 +2630,13 @@ compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_CMainWindow.h
+compiler_uic_make_all: ui_CAboutScreen.h ui_CMainWindow.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_CMainWindow.h
+	-$(DEL_FILE) ui_CAboutScreen.h ui_CMainWindow.h
+ui_CAboutScreen.h: CAboutScreen.ui \
+		/usr/local/Qt/5.15.0/gcc_64/bin/uic
+	/usr/local/Qt/5.15.0/gcc_64/bin/uic CAboutScreen.ui -o ui_CAboutScreen.h
+
 ui_CMainWindow.h: CMainWindow.ui \
 		/usr/local/Qt/5.15.0/gcc_64/bin/uic \
 		src_QCustomPlot/qcustomplot.h \
@@ -2869,6 +3157,114 @@ compiler_lex_clean:
 compiler_clean: compiler_cuda_clean compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
 
 ####### Compile
+
+CAboutScreen.o: CAboutScreen.cpp CAboutScreen.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/QDialog \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qdialog.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qtguiglobal.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qglobal.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qconfig-bootstrapped.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qconfig.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qtcore-config.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qsystemdetection.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qprocessordetection.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qcompilerdetection.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qtypeinfo.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qsysinfo.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qlogging.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qflags.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qatomic.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qbasicatomic.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qgenericatomic.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qatomic_cxx11.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qatomic_msvc.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qglobalstatic.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qmutex.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qnumeric.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qversiontagging.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qtgui-config.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qtwidgets-config.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qwidget.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qwindowdefs.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qobjectdefs.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qnamespace.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qwindowdefs_win.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qobject.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qstring.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qchar.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qbytearray.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qrefcount.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qarraydata.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qstringliteral.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qstringalgorithms.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qstringview.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qstringbuilder.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qlist.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qalgorithms.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qiterator.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qhashfunctions.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qpair.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qvector.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qcontainertools_impl.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qpoint.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qbytearraylist.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qstringlist.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qregexp.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qstringmatcher.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qcoreevent.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qscopedpointer.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qmetatype.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qvarlengtharray.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qcontainerfwd.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qobject_impl.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qmargins.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qpaintdevice.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qrect.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qsize.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qpalette.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qcolor.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qrgb.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qrgba64.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qbrush.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qmatrix.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qpolygon.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qregion.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qdatastream.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qiodevice.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qline.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qtransform.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qimage.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qpixelformat.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qpixmap.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qsharedpointer.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qshareddata.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qhash.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qfont.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qfontmetrics.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qfontinfo.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/qsizepolicy.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qcursor.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qkeysequence.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qevent.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qvariant.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qmap.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qdebug.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qtextstream.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qlocale.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qset.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qcontiguouscache.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qurl.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qurlquery.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qfile.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtCore/qfiledevice.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qvector2d.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtGui/qtouchdevice.h \
+		ui_CAboutScreen.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o CAboutScreen.o CAboutScreen.cpp
 
 main.o: main.cpp CMainWindow.h \
 		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/QMainWindow \
@@ -3892,11 +4288,28 @@ CMainWindow.o: CMainWindow.cpp CMainWindow.h \
 		/usr/local/Qt/5.15.0/gcc_64/include/QtPrintSupport/qprintpreviewwidget.h \
 		/usr/local/Qt/5.15.0/gcc_64/include/QtPrintSupport/qtprintsupportversion.h \
 		ui_CMainWindow.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/QAction \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/QApplication \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/QComboBox \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/QGroupBox \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/QHBoxLayout \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/QLabel \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/QLineEdit \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/QMenu \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/QMenuBar \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/QPushButton \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/QRadioButton \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/QScrollArea \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/QSpacerItem \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/QStatusBar \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/QVBoxLayout \
 		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/QMessageBox \
 		src_KNN/CKNN.h \
 		src_KNN/CKNNSerial.h \
 		src_KNN/CKNNParallel.h \
-		src_KNN/CKNNCuda.h
+		src_KNN/CKNNCuda.h \
+		CAboutScreen.h \
+		/usr/local/Qt/5.15.0/gcc_64/include/QtWidgets/QDialog
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o CMainWindow.o CMainWindow.cpp
 
 CKNN.o: src_KNN/CKNN.cpp src_KNN/CKNN.h \
@@ -6459,6 +6872,9 @@ qcustomplot.o: src_QCustomPlot/qcustomplot.cpp src_QCustomPlot/qcustomplot.h \
 		/usr/local/Qt/5.15.0/gcc_64/include/QtPrintSupport/qprintpreviewwidget.h \
 		/usr/local/Qt/5.15.0/gcc_64/include/QtPrintSupport/qtprintsupportversion.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qcustomplot.o src_QCustomPlot/qcustomplot.cpp
+
+moc_CAboutScreen.o: moc_CAboutScreen.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_CAboutScreen.o moc_CAboutScreen.cpp
 
 moc_CMainWindow.o: moc_CMainWindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_CMainWindow.o moc_CMainWindow.cpp

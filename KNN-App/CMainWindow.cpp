@@ -14,6 +14,7 @@
 #include "src_KNN/CKNNSerial.h"
 #include "src_KNN/CKNNParallel.h"
 #include "src_KNN/CKNNCuda.h"
+#include "CAboutScreen.h"
 
 #define datasetSize 150
 
@@ -33,6 +34,14 @@ CMainWindow::CMainWindow(QWidget *parent)
 
     //barPlot = new QCPBars(ui->PlotProcessingTime->xAxis, ui->PlotProcessingTime->yAxis2);
     connect(ui->CBModel, SIGNAL(currentIndexChanged(int)),this, SLOT(modelChange(int)));
+
+    connect(ui->actionClose, &QAction::triggered, this, &CMainWindow::close);
+
+    connect(ui->actionAbout_2, &QAction::triggered, [](){
+        CAboutScreen *aboutScreen = new CAboutScreen;
+        aboutScreen->show();
+    });
+
 }
 
 CMainWindow::~CMainWindow()

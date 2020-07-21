@@ -5,6 +5,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 CONFIG += c++11
 
 SOURCES += \
+    CAboutScreen.cpp \
     main.cpp \
     CMainWindow.cpp \
     src_KNN/CKNN.cpp \
@@ -14,6 +15,7 @@ SOURCES += \
     src_QCustomPlot/qcustomplot.cpp
 
 HEADERS += \
+    CAboutScreen.h \
     CMainWindow.h \
     src_KNN/CKNN.h \
     src_KNN/CKNNCuda.h \
@@ -23,6 +25,7 @@ HEADERS += \
     src_QCustomPlot/qcustomplot.h
 
 FORMS += \
+    CAboutScreen.ui \
     CMainWindow.ui
 
 OTHER_FILES +=  src_KNN/knnCuda.cu
